@@ -7,7 +7,7 @@
 - html/css
 - flask
 
-### nstaller les packages dans l'environnement virtuel
+### Installer les packages dans l'environnement virtuel
 ```code
     pip install -r requirements.txt
 ```
