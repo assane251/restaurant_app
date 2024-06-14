@@ -7,6 +7,27 @@
 - html/css
 - flask
 
+### Créer un environnement virtuel
+```python
+    python -m venv venv
+```
+
+### Activer l'environnement virtuel
+- Sur Windows
+```windows
+    .\venv\Scripts\activate
+```
+
+- Sur macOS/Linux
+```
+    source venv/bin/activate
+```
+
+- Sur git bash
+```
+    source venv/Scripts/activate
+```
+
 ### Installer les packages dans l'environnement virtuel
 ```code
     pip install -r requirements.txt
