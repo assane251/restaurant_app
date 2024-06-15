@@ -2,13 +2,8 @@
 
 ### Le projet vise à développer un système de gestion de restaurant permettant aux utilisateurs de consulter lesmenus disponibles, de passer des commandes et de gérer leurs commandes existantes de manière intuitive et efficace.
 
-### Prérequis:
-- bootstrap
-- html/css
-- flask
-
 ### Créer un environnement virtuel
-```python
+```code
     python -m venv venv
 ```
 
@@ -47,4 +42,5 @@
 ```psycopg
     pip install psycopg
 ```
+
 
