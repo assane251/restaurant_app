@@ -2,13 +2,8 @@
 
 ### Le projet vise à développer un système de gestion de restaurant permettant aux utilisateurs de consulter lesmenus disponibles, de passer des commandes et de gérer leurs commandes existantes de manière intuitive et efficace.
 
-### Prérequis:
-- bootstrap
-- html/css
-- flask
-
 ### Créer un environnement virtuel
-```python
+```code
     python -m venv venv
 ```
 
@@ -36,9 +31,4 @@
 ### Mettre à jour les packages
 ```code
     pip install --upgrade -r requirements.txt
-```
-
-### Instation de bootstrap
-```bootstrap
-    npm i bootstrap@5.3.3
 ```
