@@ -25,6 +25,7 @@ class Plat(db.Model):
     disponibilite = Column(Boolean, default=True)
     prix = Column(DECIMAL(10, 2), nullable=False)
     description = Column(Text, nullable=True)
+    quantite = Column(Integer, nullable=False)
 
     commande_plats = relationship('CommandePlat', back_populates='plat')
     
