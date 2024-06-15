@@ -42,3 +42,9 @@
 ```bootstrap
     npm i bootstrap@5.3.3
 ```
+
+### Instalion de psycopg 
+```psycopg
+    pip install psycopg
+```
+
