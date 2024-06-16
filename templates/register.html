@@ -1,12 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Register Form</h1>
-    
-</body>
-</html>
+<!-- @format -->
+
+{% extends 'base.html' %} {% block title %} Inscription {% endblock %} {% block
+content %}
+<form action="/register" method="post">
+  <h2 class="text-center">Inscription</h2>
+
+  <div id="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+      <li class="hidden" data-category="{{ category }}" data-message="{{ message }}"></li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+  </div>
+
+  <div class="form-group name">
+    <label for="fullname">Nom</label>
+    <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" />
+  </div>
+  <div class="form-group name">
+    <label for="fullname">Prenom</label>
+    <input
+      type="text"
+      id="prenom"
+      name="prenom"
+      placeholder="Entrez votre prenom"
+    />
+  </div>
+  <div class="form-group email">
+    <label for="email">Adresse électronique</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Entrez votre adresse électronique"
+    />
+  </div>
+  <div class="form-group password">
+    <label for="password">Mot de passe</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Entrez votre mot de passe"
+    />
+    <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+  </div>
+  <div class="form-group password">
+    <label for="password">Confirmation</label>
+    <input
+      type="password"
+      id="confirm_password"
+      placeholder="Confirmation du mot de passe"
+    />
+    <i id="pass-toggle-btn2" class="fa-solid fa-eye"></i>
+  </div>
+  <div class="form-group submit-btn">
+    <input type="submit" value="Submit" />
+  </div>
+</form>
+
+<script>
+  setTimeout(() => {
+    const flashMessages = document.getElementById("flash-messages");
+    if (flashMessages) {
+      flashMessages.style.display = "none";
+    }
+  }, 5000);
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const flashMessages = document.querySelectorAll('#flash-messages li');
+    flashMessages.forEach((msg) => {
+        const category = msg.getAttribute('data-category');
+        const message = msg.getAttribute('data-message');
+        Swal.fire({
+            position: 'top-end',
+            icon: category,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+});
+</script>
+{% endblock %}

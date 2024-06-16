@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    S'inscrire
+{% endblock %}
+
+
+{% block content %}
+<div class="col-lg-7 offset-3 mt-5">
+    <h2 class="text-center">S'inscrire</h2>
+
+    <div id="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+          <li data-category="{{ category }}" data-message="{{ message }}"></li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+      </div>
+
+  <form action="/login" method="POST">
+    <div class="form-group email">
+        <label for="email">Adresse électronique</label>
+        <input type="text" id="email" name="email" autocomplete="off" autofocus placeholder="Entrez votre adresse électronique" />
+    </div>
+    <div class="form-group password">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" autocomplete="off" name="password" placeholder="Entrez votre mot de passe" />
+        <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+    </div>
+    <div class="form-group submit-btn">
+        <input type="submit" value="Submit" />
+    </div>
+  </form>
+</div>
+
+<script>
+    setTimeout(() => {
+      const flashMessages = document.getElementById("flash-messages");
+      if (flashMessages) {
+        flashMessages.style.display = "none";
+      }
+    }, 5000);
+  
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const flashMessages = document.querySelectorAll("#flash-messages li");
+      flashMessages.forEach((msg) => {
+        const category = msg.getAttribute("data-category");
+        const message = msg.getAttribute("data-message");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+  
+        Toast.fire({
+          icon: "success",
+          title: "Signed in successfully",
+        });
+      });
+    });
+  </script>
+{% endblock %}
