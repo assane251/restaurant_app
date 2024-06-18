@@ -57,6 +57,36 @@
 
       
   </div>
+
+  <div class="container mt-4">
+    <div class="row">
+        {% for uneplat in plats %}
+            <div class="col-md-4 mb-4">
+              
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename=uneplat.image) }}" class="card-img-top" alt="{{ uneplat.nom }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ uneplat.nom }}</h5>
+                        <p class="card-text">{{ uneplat.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-muted">Prix: {{ uneplat.prix }} €</p>
+                        <form action="{{ url_for('add_to_cart') }}" method="POST" class="add-to-cart-form">
+                          <input type="hidden" name="nom" value="{{ uneplat.nom }}">
+                          <input type="hidden" name="description" value="{{ uneplat.description }}">
+                          <input type="hidden" name="image" value="{{ uneplat.image }}">
+                          <input type="hidden" name="prix" value="{{ uneplat.prix }}">
+                          <button type="submit" class="btn btn-primary acheter-btn">Acheter</button>
+                      </form>
+                      </div>
+                </div>
+            </div>
+            {% if loop.index % 3 == 0 %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
     
     
     <!-- Bootstrap JavaScript Libraries -->

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Nos Produits</h1>
+        <div class="product-grid">
+            {% for plat in plats %}
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename=plat.image) }}" alt="Image du plat">
+                </div>
+                <div class="product-details">
+                    <h3>{{ plat.nom }}</h3>
+                    <p>{{ plat.description }}</p>
+                    <p class="text-muted">Prix: {{ plat.prix }} €</p>
+                    <button class="btn btn-primary btn-commander" data-nom="{{ plat.nom }}" data-description="{{ plat.description }}" data-image="{{ plat.image }}" data-prix="{{ plat.prix }}">Commander</button>
+                </div>
+            </div>
+            {% if loop.index % 2 == 0 %}
+            <div class="w-100"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

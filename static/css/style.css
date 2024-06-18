@@ -191,3 +191,26 @@ body, html {
   .navbar-custom {
     background: #e65c00; /* La couleur que vous voulez pour le fond de la navbar */
   
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+    }
+    .card-img-top:hover {
+        transform: scale(1.1); /* Zoom in on hover */
+    }
+    .navbar .cart {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .navbar .cart .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: red;
+        color: white;
+    }
+    

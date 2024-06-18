@@ -12,7 +12,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
-import data
+from data import plats
 
 import sys
 sys.setrecursionlimit(15000)
@@ -36,7 +36,7 @@ def load_user(user_id):
 @app.route('/')
 def index():
     
-    return render_template('index.html')
+    return render_template('index.html', plats=plats)
 
 def generate_verification_code():
     return ''.join(str(random.randint(0, 9)) for _ in range(6))
@@ -128,6 +128,20 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    plat = request.form.to_dict()
+    cart = session.get('cart', [])
+    cart.append(plat)
+    session['cart'] = cart
+    session['cart_count'] = len(cart)
+    return jsonify({'count': session['cart_count']})
+
+@app.route('/cart')
+def cart():
+    cart = session.get('cart', [])
+    return render_template('cart.html', cart=cart)
 
 @app.route('/create_commande', methods=['GET', 'POST'])
 # @login_required
