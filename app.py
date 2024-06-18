@@ -1,5 +1,7 @@
 
-from flask import Flask, render_template, jsonify, flash
+import random
+from flask import Flask, render_template, jsonify, flash, session
+from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from config import Config
 from models import db, Plat, User, Commande, CommandePlat
@@ -10,23 +12,38 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+import data
+
+import sys
+sys.setrecursionlimit(15000)
 
 app = Flask(__name__)
 
 app.config.from_object(Config)
 db.init_app(app)
 migrate = Migrate(app,db)
-
+mail = Mail(app)
 login_manager = LoginManager()
+
 login_manager.init_app(app)
 
 
 @login_manager.user_loader
-def load_user(id): 
-    return User.get_or_404(id)
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 @app.route('/')
 def index():
+    
     return render_template('index.html')
+
+def generate_verification_code():
+    return ''.join(str(random.randint(0, 9)) for _ in range(6))
+
+
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -35,26 +52,54 @@ def register():
         prenom = request.form.get('prenom')
         email = request.form.get('email')
         password = request.form.get('password')
+        
+        verification_code = generate_verification_code()
+        print("verification_code")
+
+        # Envoyer l'e-mail de vérification
+        # msg = Message('Code de vérification', recipients=[email])
+        # msg.body = f"Votre code de vérification est : {verification_code}"
+        # mail.send(msg)
+
+        # Stocker le code de vérification dans la session
+        # session['verification_code'] = verification_code
         if not all([nom,prenom,email,password]):
-            return jsonify({'message': 'On le fait avec java ou creation d\'un div pour afficher le message'})
+            return flash({'message': 'Vous devez remplir tous les champs'})
         
         user = User.query.filter_by(email=email).first()
         if user: 
             flash({'message': 'ce email a deja un compte'})
-            redirect(url_for('login'))
-            
+            return redirect(url_for('login'))
         else:
             new_user = User(nom=nom, prenom=prenom, email=email, password=generate_password_hash(password))
             try:
               db.session.add(new_user)
               db.session.commit()
               flash({'message': 'Votre inscription a reussit'})
-              redirect(url_for('login'))
+              print('Utlisateur ajouter avec suces')
+              return redirect(url_for('index'))
             except:
               flash({'message': 'erreur'})
+              print('erreur')
               
               
     return render_template('register.html')
+
+
+@app.route('/verify', methods=['GET', 'POST'])
+def verify():
+    if request.method == 'POST':
+        entered_code = request.form['code']
+        stored_code = session.get('verification_code')
+
+        if entered_code == stored_code:
+            # Le code est correct, connectez l'utilisateur automatiquement
+            # Vous pouvez ajouter ici la logique pour connecter l'utilisateur
+            return "Code vérifié. Vous êtes connecté maintenant."
+        else:
+            return "Code incorrect. Veuillez réessayer."
+
+    return render_template('verify_email.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -66,22 +111,26 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password): 
             login_user(user)
-            flash({'message': 'Vous etes connecter'})
-            redirect(url_for('acceuil'))
+            print('reussit')
+           # flash({'message': 'Vous etes connecter'})
+            
+            return redirect(url_for('index'))
         else:
-            flash({'message': 'email ou password incorrect'})
-            redirect(url_for('login'))
+            print('echec')
+            #flash({'message': 'email ou password incorrect'})
+            
+            return redirect(url_for('login'))
     return render_template('login.html')
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 @app.route('/create_commande', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def create_commande():
     if request.method == 'POST': 
         user_id = current_user.id
