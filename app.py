@@ -87,9 +87,7 @@ def register():
         # msg.body = f"Votre code de vérification est : {verification_code}"
         # mail.send(msg)
 
-        # Stocker le code de vérification dans la session
-        # session['verification_code'] = verification_code
-        if not all([nom,prenom,email,password]):
+        if not all([nom, prenom, email, password]):
             return flash({'message': 'Vous devez remplir tous les champs'})
         
         user = User.query.filter_by(email=email).first()
@@ -112,20 +110,20 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/verify', methods=['GET', 'POST'])
-def verify():
-    if request.method == 'POST':
-        entered_code = request.form['code']
-        stored_code = session.get('verification_code')
+# @app.route('/verify', methods=['GET', 'POST'])
+# def verify():
+#     if request.method == 'POST':
+#         entered_code = request.form['code']
+#         stored_code = session.get('verification_code')
 
-        if entered_code == stored_code:
-            # Le code est correct, connectez l'utilisateur automatiquement
-            # Vous pouvez ajouter ici la logique pour connecter l'utilisateur
-            return "Code vérifié. Vous êtes connecté maintenant."
-        else:
-            return "Code incorrect. Veuillez réessayer."
+#         if entered_code == stored_code:
+#             # Le code est correct, connectez l'utilisateur automatiquement
+#             # Vous pouvez ajouter ici la logique pour connecter l'utilisateur
+#             return "Code vérifié. Vous êtes connecté maintenant."
+#         else:
+#             return "Code incorrect. Veuillez réessayer."
 
-    return render_template('verify_email.html')
+#     return render_template('verify_email.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -202,7 +200,6 @@ def google_logged_in(blueprint, token):
             db.session.commit()
         login_user(user)
 
-
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
     plat = request.form.to_dict()
@@ -219,8 +216,11 @@ def cart():
 
 @app.route('/contact')
 def contact():
-    
     return render_template('contact.html')
+
+@app.route('/boutique')
+def contact():
+    return render_template('boutique.html')
 
 
 @app.route('/create_commande', methods=['GET', 'POST'])
