@@ -114,3 +114,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.pathname.includes('login')) {
+      document.getElementById('navbar').classList.add('navbar-custom');
+    }
+  });
+  setTimeout(() => {
+    const flashMessages = document.getElementById("flash-messages");
+    if (flashMessages) {
+      flashMessages.style.display = "none";
+    }
+  }, 5000);
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    const flashMessages = document.querySelectorAll("#flash-messages li");
+    flashMessages.forEach((msg) => {
+      const category = msg.getAttribute("data-category");
+      const message = msg.getAttribute("data-message");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: category,
+        title: message,
+      });
+    });
+  });

@@ -220,3 +220,53 @@ body.page-cart #navbar {
     
 
     
+
+    .navbar-custom {
+        background-color: whitesmoke;
+      }
+      .zoom-effect {
+        transition: transform 0.3s ease-in-out;
+      }
+    
+      .zoom-effect:focus {
+        transform: scale(1.1);
+      }
+    
+      /* Animation de fondu */
+      .form-animation {
+        display: none;
+      }
+    
+      .fade-top {
+        animation: fadeTop 0.5s ease-out;
+      }
+    
+      @keyframes fadeTop {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      .google-btn {
+        width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        margin-left: 110px;
+      }
+    .google-btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
