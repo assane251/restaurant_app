@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+  </head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <style>
+    body{
+        background-color: whitesmoke;
+    }
+    .unique-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    .unique-row {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .unique-col-md-6 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .unique-form-container {
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .unique-image-container {
+        background-image: url({{ url_for('static', filename='image/contact.png') }});
+        background-size: cover;
+        background-position: center;
+        color: white;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .unique-image-container h2,
+    .unique-image-container p {
+        margin: 0;
+    }
+    
+    .unique-image-container h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .unique-image-container p {
+        font-size: 1.2rem;
+    }
+    
+    /* Transitions pour l'effet de déplacement */
+    .unique-form-column.translate-right {
+        transform: translateX(50%);
+    }
+    
+    .unique-image-column.translate-left {
+        transform: translateX(-50%);
+    }
+    .unique-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .description-column {
+        flex-basis: 25%; /* 1/4 de la largeur */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    .map-column {
+        flex-basis: 75%; /* 3/4 de la largeur */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    .map {
+        width: -75%; /* La carte occupe toute la largeur de la colonne */
+        height: 400px; /* Hauteur de la carte ajustée */
+    }
+  </style>
+  <body class="">
+    
+    
+   
+    {% include "includes/_navbar.html" %}
+    
+    <div class="carousel-container" id=".carousel-slide">
+      
+        <div class="carousel">
+
+          <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='image/contactslide.jpg') }}');">
+              <div class="carousel-content">
+                  <h1 class="arc-title">CONTACTER NOUS </h1>
+                  <p>Description for the first image.</p>
+                  <a href="#" class="btn">Appeler</a>
+              </div>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="unique-container mt-5">
+        <div class="unique-row">
+            <div class="unique-col-md-6 unique-form-column" id="form-column">
+                <div class="unique-form-container bg-light p-4 rounded shadow-sm">
+                    <h2 class="mb-4">Contactez-nous</h2>
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+            <div class="unique-col-md-6 unique-image-column" id="image-column">
+                <div class="unique-image-container text-white text-center d-flex flex-column justify-content-center align-items-center">
+                    <h2>Contactez-nous dès aujourd'hui!</h2>
+                    <p>Nous sommes là pour vous aider. Envoyez-nous un message et nous vous répondrons dès que possible.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="unique-container mt-5">
+        <div class="unique-row">
+            <div class="unique-col-md-6 description-column">
+                <h2>Description de l'endroit</h2>
+                <p>Insérez ici votre description de l'endroit où vous vous trouvez. Cela peut inclure des détails sur le lieu, son histoire, ses caractéristiques, etc.</p>
+            </div>
+            <div class="unique-col-md-6 map-column">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Bootstrap JavaScript Libraries -->
+    
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+      
+      <script>
+        function initMap() {
+            // Centrez la carte sur une position spécifique
+            var myLatLng = {lat: -25.363, lng: 131.044};
+        
+            // Créez une nouvelle carte Google Maps avec des options de zoom et de centrage
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: myLatLng
+            });
+        
+            // Ajoutez un marqueur à la carte pour indiquer une position spécifique
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Nos Porte sont ouvert'
+            });
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJbc3XNJKmhvi6kCzE_x4i1Ja0_MT85k4&callback=initMap" async defer></script>
+      
+      <script
+      src="{{ url_for('static', filename='js/node.js') }}" >
+    </script>
+
+  </body>
+  
+</html>

@@ -1,6 +1,6 @@
 
 import random
-from flask import Flask, render_template, jsonify, flash, session
+from flask import Flask, json, render_template, jsonify, flash, session
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from config import Config
@@ -13,6 +13,9 @@ from wtforms import StringField, PasswordField, SubmitField
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from data import plats
+from authlib.integrations.flask_client import OAuth
+from flask_dance.contrib.google import make_google_blueprint, google
+from flask_dance.consumer import oauth_authorized
 
 import sys
 sys.setrecursionlimit(15000)
@@ -25,7 +28,30 @@ migrate = Migrate(app,db)
 mail = Mail(app)
 login_manager = LoginManager()
 
+
 login_manager.init_app(app)
+
+
+#fichier_json = 'myjson.json'
+
+#with open(fichier_json, 'r') as json_file:
+    #json_data = json.load(json_file)
+
+#client_id = json_data['web']['client_id']
+#client_secret = json_data['web']['client_secret']
+
+client_id = "76986610716-puqfecpsnpqm0hjcm9pvh7sj3d3chpoe.apps.googleusercontent.com"
+client_secret = "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"
+
+google_bp = make_google_blueprint(
+    client_id=client_id,
+    client_secret=client_secret,
+    scope=['profile', 'email', 'https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/drive.readonly'],
+    redirect_to='http://localhost:5000/google_login/authorized'  
+)
+app.register_blueprint(google_bp, url_prefix="/google_login")
+
+#oauth = OAuth(app)
 
 
 @login_manager.user_loader
@@ -122,11 +148,59 @@ def login():
             return redirect(url_for('login'))
     return render_template('login.html')
 
+
+@app.route('/google_login')
+def google_login():
+    if not google.authorized:
+        return redirect(url_for('google.login'))
+    resp = google.get("/oauth2/v2/userinfo")
+    if not resp.ok:
+        flash("Échec de la connexion Google", 'danger')
+        return redirect(url_for('login'))
+
+    user_info = resp.json()
+    email = user_info["email"]
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        user = User(email=email)
+        db.session.add(user)
+        db.session.commit()
+
+    login_user(user)
+    flash('Vous êtes connecté avec Google', 'success')
+    return redirect(url_for('index'))
+
+@app.route('/google_login/authorized')
+def google_authorized():
+    resp = google.authorized_response()
+    if resp is None or resp.get('access_token') is None:
+        return "Access denied: reason={} error={}".format(
+            request.args.get('error_reason'),
+            request.args.get('error_description')
+        )
+    session['google_token'] = (resp['access_token'], '')
+    user_info = google.get('userinfo')
+    return user_info.json()
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@oauth_authorized.connect_via(google_bp)
+def google_logged_in(blueprint, token):
+    resp = blueprint.session.get("/oauth2/v2/userinfo")
+    if resp.ok:
+        user_info = resp.json()
+        email = user_info["email"]
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User(email=email)
+            db.session.add(user)
+            db.session.commit()
+        login_user(user)
 
 
 @app.route('/add_to_cart', methods=['POST'])
@@ -142,6 +216,12 @@ def add_to_cart():
 def cart():
     cart = session.get('cart', [])
     return render_template('cart.html', cart=cart)
+
+@app.route('/contact')
+def contact():
+    
+    return render_template('contact.html')
+
 
 @app.route('/create_commande', methods=['GET', 'POST'])
 # @login_required

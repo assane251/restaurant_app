@@ -46,16 +46,42 @@
         transform: translateY(0);
       }
     }
+
+    .google-btn {
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      margin-left: 110px;
+    }
+  .google-btn img {
+    height: 20px;
+    margin-right: 10px;
+  }
   </style>
 
 
   <body>
     {% include "includes/_navbar.html" %}
     <div class="container d-flex justify-content-center align-items-center">
+      
         <div class="form-container p-4">
           <h2 class="text-center">S'identifier</h2>
 
-
+          <div class="mb-3">
+              <a href="{{ url_for('google_login') }}" class="google-btn">
+                <img src="{{ url_for('static', filename='images/logo-google.png') }}" alt="">
+                <span >Se Connecter </span>
+              </a>
+            
+          </div>
           <div id="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %} {% if
             messages %}

@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.getElementById('navbar');
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
+    const cartLink = document.getElementById('cart-link');
     let currentIndex = 0;
+   
+
 
     function showSlide(index) {
         const offset = -index * 100;
