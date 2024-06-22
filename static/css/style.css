@@ -4,20 +4,24 @@ body, html {
     height: 100%;
     font-family: Arial, sans-serif;
 }
+
 .navbar {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     padding: 1em;
-    background: none;
+    background: none; 
+    background-color: transparent; 
     color: white;
-    text-align: center;
+    /* text-align: center; */
     z-index: 1000;
 }
+
 .navbar .navbar-nav .nav-link {
     color: white; 
     position: relative;
 }
+
 /* Animation pour le survol */
 .navbar-nav .nav-link::before {
     content: ''; 
@@ -26,35 +30,25 @@ body, html {
     left: 0; 
     width: 100%;
     height: 2px; 
-    background-color: #ff6600;
+    background-color: red;
     transition: width 0.3s ease-out, background-color 0.3s ease-out; 
     transform: scaleX(0); 
     transform-origin: left; 
 }
 
-
 .navbar-nav .nav-link:hover::before {
     width: 100%; 
     transform: scaleX(1); 
 }
+
 body.page-cart #navbar {
     background-color: whitesmoke;
 }
 
 /* Style pour le texte au survol */
-.navbar-nav .nav-link:hover {
-    color: #ff6600; 
+.nav-item .nav-link:hover {
+    color: red; 
     transition: color 0.3s ease-out; /* Animation de transition */
-}
-.dropdown-menu {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
-
-.dropdown-menu.show {
-    display: block;
-    opacity: 1;
 }
 
 .carousel-container {
@@ -102,18 +96,17 @@ body.page-cart #navbar {
     margin: 0.5em 0;
 }
 
-
 /* Style pour l'animation de zoom */
-.zoomed {
-    transform: scale(1.1); /* Zoom de l'image */
-}
+/* .zoomed {
+    transform: scale(1.1);
+} */
 
 .btn {
     display: inline-block;
     padding: 0.75em 1.5em;
     margin-top: 1em;
     border-radius: 0.5em;
-    background-color: rgba(255, 255, 255, 0.8);
+    /* background-color: rgba(255, 255, 255, 0.8); */
     color: black;
     text-decoration: none;
     font-weight: bold;
@@ -124,16 +117,25 @@ body.page-cart #navbar {
     background-color: rgba(255, 255, 255, 1);
 }
 
+.card-body {
+    line-height: 1;
+}
+
+.acheter-btn {
+    margin-top: -.3rem;
+    padding: 0;
+}
+
 .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: transparent;
+    color: transparent;
     border: none;
     padding: 1em;
     cursor: pointer;
-    z-index: 1001;
+    /* z-index: 1001; */
 }
 .arc-title {
     font-size: 36px; /* Taille de la police */
@@ -141,7 +143,7 @@ body.page-cart #navbar {
 
 }
 .arc-title :hover{
-    color:#ff6600; /* Gras */
+    color:red; /* Gras */
     
 }
 .btn {
@@ -149,7 +151,7 @@ body.page-cart #navbar {
     padding: 10px 20px;
     font-size: 16px;
     color: white;
-    background-color: #ff6600;
+    background-color: red;
     text-decoration: none;
     border: none;
     border-radius: 5px;
@@ -158,7 +160,7 @@ body.page-cart #navbar {
 
 .btn:hover {
     background-color: white;
-    color: #ff6600;
+    color: red;
     transform: scale(1.05); /* Augmente légèrement la taille du bouton */
 }
 #prevButton {
@@ -169,104 +171,179 @@ body.page-cart #navbar {
     right: 1em;
 }
 
-
-.form-container {
-   
-    
+.form-container { 
     background-color: whitesmoke;
     /* border: 1px solid white; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
     margin-top: 100px;
-  }
-  .form-container:hover {
-    transform: scale(1.05);
-  }
-  .form-control {
-    transition: box-shadow 0.3s, border-color 0.3s;
-  }
-  .form-control:focus {
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    border-color: #007bff;
-  }
+}
 
-/* 
-  .navbar-custom {
-    background: #e65c00; /* La couleur que vous voulez pour le fond de la navbar */
-  
-    .card-img-top {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
-    }
-    .card-img-top:hover {
-        transform: scale(1.1); /* Zoom in on hover */
-    }
-    .navbar .cart {
-        position: relative;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-    .navbar .cart .badge {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: red;
-        color: white;
+.form-container:hover {
+transform: scale(1.05);
+}
 
-    }
-    
+.form-control {
+transition: box-shadow 0.3s, border-color 0.3s;
+}
 
-    
+.form-control:focus {
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+border-color: #007bff;
+}
 
-    .navbar-custom {
-        background-color: whitesmoke;
-      }
-      .zoom-effect {
-        transition: transform 0.3s ease-in-out;
-      }
-    
-      .zoom-effect:focus {
-        transform: scale(1.1);
-      }
-    
-      /* Animation de fondu */
-      .form-animation {
-        display: none;
-      }
-    
-      .fade-top {
-        animation: fadeTop 0.5s ease-out;
-      }
-    
-      @keyframes fadeTop {
-        0% {
-          opacity: 0;
-          transform: translateY(-50px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-  
-      .google-btn {
-        width: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background-color: red;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        margin-left: 110px;
-      }
-    .google-btn img {
-      height: 20px;
-      margin-right: 10px;
-    }
+.navbar-custom {
+background: red;
+} 
+
+.card-img-top {
+width: 100%;
+/* height: 180px; */
+object-fit: cover;
+transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+}
+.card-img-top:hover {
+transform: scale(1.09); /* Zoom in on hover */
+}
+.navbar .cart {
+position: relative;
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.navbar .cart .badge {
+position: absolute;
+top: 0;
+right: 0;
+background-color: red;
+color: white;
+
+}
+
+.navbar-custom {
+background-color: whitesmoke;
+}
+
+.zoom-effect {
+transition: transform 0.3s ease-in-out;
+}
+
+.zoom-effect:focus {
+transform: scale(1.1);
+}
+
+/* Animation de fondu */
+.form-animation {
+display: none;
+}
+
+.fade-top {
+animation: fadeTop 0.5s ease-out;
+}
+
+@keyframes fadeTop {
+0% {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.google-btn {
+width: 300px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+background-color: red;
+color: white;
+border: none;
+padding: 10px;
+border-radius: 5px;
+margin-bottom: 20px;
+margin-left: 110px;
+}
+
+.google-btn img {
+height: 20px;
+margin-right: 10px;
+}
+
+.main-carousel-content {
+position: relative;
+text-align: center;
+color: #fff;
+}
+
+.carousel-item {
+text-align: center;
+}
+
+.circle-div {
+width: 150px;
+height: 120px;
+border-radius: 50%;
+background-color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: border-radius 0.3s ease-out;
+
+}
+
+.circle-div:hover {
+border: 1px solid red;
+border-radius: 50%;
+}
+
+.circle-div img {
+width: 50px;
+height: 80px;
+border-radius: 50%;
+
+
+}
+
+.carousel-inner {
+width: 50%;
+margin: 0 150px;
+height: 200px;
+justify-content: center; 
+left: 15%;
+}
+
+.breadcrumb {
+margin-bottom: 20px; /* Adjust margin to reduce space */
+}
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 40px;
+    border-radius: 50%;
+    /* background: rgba(0,0,0,0.5); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 15.5%;
+    transform: translateY(-50%);
+    margin: 0 40px;
+}
+.carousel-control-prev{
+    margin-left: 18%;
+
+}
+.carousel-control-next{
+    left: 77%;
+} 
+
+.carousel-control-prev {
+    left: 20px; /* 20px away from the left side of the carousel */
+}
+
+.carousel-control-next {
+    right: 20px; /* 20px away from the right side of the carousel */
+}

@@ -18,14 +18,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
   <body>
-    {% include "includes/_navbar.html" %}
+    
+    {% include "modals.html" %}
     
     <div class="carousel-container" id="carouselContainer">
       
       <div class="carousel">
-
+        
           <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='image/image1.jpg') }}');">
-              <div class="carousel-content">
+            {% include "includes/_navbar.html" %}
+            <div class="carousel-content">
                   <h1 class="arc-title">MEILLEUR RESTAURANT</h1>
                   <p>Description for the first image.</p>
                   <a href="#" class="btn">Learn More</a>
@@ -51,13 +53,13 @@
       
       <button class="carousel-button" id="prevButton">&#10094;</button>
       <button class="carousel-button" id="nextButton">&#10095;</button>
-
+      
       
   </div>
 
   <div class="container mt-4">
     <div class="row">
-        {% for uneplat in plats %}
+        {% for uneplat in plats[:3] %}
             <div class="col-md-4 mb-4">
               
                 <div class="card h-100">
@@ -65,9 +67,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ uneplat.nom }}</h5>
                         <p class="card-text">{{ uneplat.description }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="text-muted">Prix: {{ uneplat.prix }} €</p>
+                        <p class="text-muted">Prix: {{ uneplat.prix }} CFA</p>
                         <form action="{{ url_for('add_to_cart') }}" method="POST" class="add-to-cart-form">
                           <input type="hidden" name="nom" value="{{ uneplat.nom }}">
                           <input type="hidden" name="description" value="{{ uneplat.description }}">
@@ -75,14 +75,12 @@
                           <input type="hidden" name="prix" value="{{ uneplat.prix }}">
                           <button type="submit" class="btn btn-primary acheter-btn">Acheter</button>
                       </form>
-                      </div>
+                    </div>
                 </div>
             </div>
-            {% if loop.index % 3 == 0 %}
-                </div><div class="row">
-            {% endif %}
         {% endfor %}
     </div>
+    <button type="submit" class="btn btn-primary acheter-btn">TOUS LES PRODUITS</button>
 </div>
     
     

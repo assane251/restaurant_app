@@ -54,9 +54,9 @@
    
     {% include "includes/_navbar.html" %}
     
-    <div style="margin-top: 120px;">
-        <h1 class="text-center "style=" color: #ff6600; ">
-            VOTRE PANIER
+    <div style="margin-top: 120px; margin-bottom: 22px;">
+        <h1 class="text-center" style="color: red;">
+            PANIER
         </h1>
     </div>
     <div class="container">
@@ -72,11 +72,10 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ plat.nom }}</h5>
                                 <p class="card-text">{{ plat.description }}</p>
-                                <p class="card-text"><small class="text-muted">Prix: {{ plat.prix }} €</small></p>
-                            </div>
-                            <div class="card-footer">
+                                <p class="card-text"><small class="text-muted">Prix: {{ plat.prix }} CFA</small></p>
                                 <button type="button" class="btn btn-primary acheter-btn">Commander</button>
                             </div>
+
                         </div>
                     </div>
                 </div>

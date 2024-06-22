@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     const cartLink = document.getElementById('cart-link');
+   
     let currentIndex = 0;
    
 
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSlide(index) {
         const offset = -index * 100;
         carousel.style.transform = `translateX(${offset}%)`;
+      
     }
 
     prevButton.addEventListener('click', function () {
@@ -151,3 +153,21 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+
+  function zoomIn(element) {
+    element.style.boxShadow = '0 0 10px rgba(53, 53, 53, 0.8)'; // Shadow effect on hover with dark color
+    element.querySelector('img').style.transform = 'scale(1.1)'; // Zoom in image
+}
+
+function zoomOut(element) {
+    element.style.boxShadow = ''; // Remove shadow on mouse out
+    element.querySelector('img').style.transform = ''; // Reset image zoom
+}
+
+document.querySelector('#heart').addEventListener('click', function(event) {
+    event.preventDefault();
+    this.querySelector('.fa-heart').classList.toggle('red');
+});
+
+ 
