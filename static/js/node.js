@@ -1,32 +1,19 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const carousel = document.querySelector('.carousel');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const navbar = document.getElementById('navbar');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const cartLink = document.getElementById('cart-link');
-    let currentIndex = 0;
-   
+var slideLeft = {
+    distance: '40%',
+    opacity: null,
+    origin: 'right',
+    duration: 5000
+};
 
+var slideUp = {
+    origin: 'top',
+    duration: 3000,
+    // timer: 1000
+}
 
-    function showSlide(index) {
-        const offset = -index * 100;
-        carousel.style.transform = `translateX(${offset}%)`;
-    }
+ScrollReveal().reveal('.carousel-content', slideLeft);
+ScrollReveal().reveal('#image-carousel', slideUp);
 
-    prevButton.addEventListener('click', function () {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-        showSlide(currentIndex);
-    });
-
-    nextButton.addEventListener('click', function () {
-        currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-        showSlide(currentIndex);
-    });
-
-    // Initialize the carousel
-    showSlide(currentIndex);
-});
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
@@ -40,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
 
@@ -151,3 +139,16 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+   // Script pour activer la classe 'active' sur le lien cliqué
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+        document.querySelector('.nav-link.active').classList.remove('active');
+        this.classList.add('active');
+    });
+})
+
+document.querySelector('#heart').addEventListener('click', function(event) {
+    event.preventDefault();
+    this.querySelector('.fa-heart').classList.toggle('red');
+});

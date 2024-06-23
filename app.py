@@ -40,16 +40,16 @@ login_manager.init_app(app)
 #client_id = json_data['web']['client_id']
 #client_secret = json_data['web']['client_secret']
 
-client_id = "76986610716-puqfecpsnpqm0hjcm9pvh7sj3d3chpoe.apps.googleusercontent.com"
-client_secret = "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"
-
-google_bp = make_google_blueprint(
-    client_id=client_id,
-    client_secret=client_secret,
-    scope=['profile', 'email', 'https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/drive.readonly'],
-    redirect_to='http://localhost:5000/google_login/authorized'  
-)
-app.register_blueprint(google_bp, url_prefix="/google_login")
+# client_id = "76986610716-puqfecpsnpqm0hjcm9pvh7sj3d3chpoe.apps.googleusercontent.com"
+# client_secret = "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"
+#
+# google_bp = make_google_blueprint(
+#     client_id=client_id,
+#     client_secret=client_secret,
+#     scope=['profile', 'email', 'https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/drive.readonly'],
+#     redirect_to='http://localhost:5000/google_login/authorized'
+# )
+# app.register_blueprint(google_bp, url_prefix="/google_login")
 
 #oauth = OAuth(app)
 
@@ -61,15 +61,10 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    
     return render_template('index.html', plats=plats)
 
 def generate_verification_code():
     return ''.join(str(random.randint(0, 9)) for _ in range(6))
-
-
-
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -78,7 +73,7 @@ def register():
         prenom = request.form.get('prenom')
         email = request.form.get('email')
         password = request.form.get('password')
-        
+
         verification_code = generate_verification_code()
         print("verification_code")
 
@@ -89,9 +84,9 @@ def register():
 
         if not all([nom, prenom, email, password]):
             return flash({'message': 'Vous devez remplir tous les champs'})
-        
+
         user = User.query.filter_by(email=email).first()
-        if user: 
+        if user:
             flash({'message': 'ce email a deja un compte'})
             return redirect(url_for('login'))
         else:
@@ -105,8 +100,8 @@ def register():
             except:
               flash({'message': 'erreur'})
               print('erreur')
-              
-              
+
+
     return render_template('register.html')
 
 
@@ -147,18 +142,18 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/google_login')
-def google_login():
-    if not google.authorized:
-        return redirect(url_for('google.login'))
-    resp = google.get("/oauth2/v2/userinfo")
-    if not resp.ok:
-        flash("Échec de la connexion Google", 'danger')
-        return redirect(url_for('login'))
-
-    user_info = resp.json()
-    email = user_info["email"]
-    user = User.query.filter_by(email=email).first()
+# @app.route('/google_login')
+# def google_login():
+#     if not google.authorized:
+#         return redirect(url_for('google.login'))
+#     resp = google.get("/oauth2/v2/userinfo")
+#     if not resp.ok:
+#         flash("Échec de la connexion Google", 'danger')
+#         return redirect(url_for('login'))
+#
+#     user_info = resp.json()
+#     email = user_info["email"]
+#     user = User.query.filter_by(email=email).first()
 
     if not user:
         user = User(email=email)
@@ -169,17 +164,17 @@ def google_login():
     flash('Vous êtes connecté avec Google', 'success')
     return redirect(url_for('index'))
 
-@app.route('/google_login/authorized')
-def google_authorized():
-    resp = google.authorized_response()
-    if resp is None or resp.get('access_token') is None:
-        return "Access denied: reason={} error={}".format(
-            request.args.get('error_reason'),
-            request.args.get('error_description')
-        )
-    session['google_token'] = (resp['access_token'], '')
-    user_info = google.get('userinfo')
-    return user_info.json()
+# @app.route('/google_login/authorized')
+# def google_authorized():
+#     resp = google.authorized_response()
+#     if resp is None or resp.get('access_token') is None:
+#         return "Access denied: reason={} error={}".format(
+#             request.args.get('error_reason'),
+#             request.args.get('error_description')
+#         )
+#     session['google_token'] = (resp['access_token'], '')
+#     user_info = google.get('userinfo')
+#     return user_info.json()
 
 @app.route('/logout')
 @login_required
@@ -187,18 +182,18 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@oauth_authorized.connect_via(google_bp)
-def google_logged_in(blueprint, token):
-    resp = blueprint.session.get("/oauth2/v2/userinfo")
-    if resp.ok:
-        user_info = resp.json()
-        email = user_info["email"]
-        user = User.query.filter_by(email=email).first()
-        if not user:
-            user = User(email=email)
-            db.session.add(user)
-            db.session.commit()
-        login_user(user)
+# @oauth_authorized.connect_via(google_bp)
+# def google_logged_in(blueprint, token):
+#     resp = blueprint.session.get("/oauth2/v2/userinfo")
+#     if resp.ok:
+#         user_info = resp.json()
+#         email = user_info["email"]
+#         user = User.query.filter_by(email=email).first()
+#         if not user:
+#             user = User(email=email)
+#             db.session.add(user)
+#             db.session.commit()
+#         login_user(user)
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
@@ -219,7 +214,7 @@ def contact():
     return render_template('contact.html')
 
 @app.route('/boutique')
-def contact():
+def boutique():
     return render_template('boutique.html')
 
 
@@ -231,17 +226,23 @@ def create_commande():
         date_commande = datetime.utcnow()
         statut = request.form.get('statut')
         commande = Commande(user_id=user_id, date_commande=date_commande, statut=statut)
-        selectplats = request.form.getlist('nomselectplat')#sera une select de choix mais stocke chaque plat dans une liste
+        selectplats = request.form.getlist('nomselectplat')
         db.session.add(commande)
         db.session.commit()
         disponible_plats = Plat.query.filter_by(disponibilite = True).all()#get plat dispo
         plats_dict = {plat.id: plat for plat in disponible_plats}#chaque plat sur une liste
-        #Apres on discute pour la suite
+
     else: 
         flash('message', 'erreur')
         
         
     return render_template(url_for('create_commande.html'))
+
+
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
 
 if __name__ == '__main__':

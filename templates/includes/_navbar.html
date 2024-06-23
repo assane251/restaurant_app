@@ -1,271 +1,145 @@
-<!-- @format -->
-<!-- Modal Body -->
-<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
 <div
-  class="modal fade"
-  id="modalId"
-  tabindex="-1"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  role="dialog"
-  aria-labelledby="modalTitleId"
-  aria-hidden="true"
+        class="modal fade"
+        id="modalId"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
 >
-  <div
-    class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
-    role="document"
-  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitleId">Connexion</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        {% include "login.html" %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
+    <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
+            role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Connexion</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                {% include "login.html" %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- Optional: Place to the bottom of scripts -->
-<script>
-  const myModal = new bootstrap.Modal(
-    document.getElementById("modalId"),
-    options
-  );
-</script>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="input-group my-2 p-1">
+            <label class="input-group-text" for="inputGroupFile02"><i class="fa-solid fa-search"></i></label>
+            <input type="text" class="form-control" id="search">
+        </div>
+    </div>
+</div>
 
-<nav id="navbar" class="navbar navbar-expand-sm navbar-light bg-none">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <svg
-        version="1.1"
-        viewBox="0 0 2000 2000"
-        width="120"
-        height="100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          transform="translate(981,526)"
-          d="m0 0h31l19 3 19 5 20 8 16 8 11 7 12 9 11 10 7 8 9 10 3 3 24-4h38l25 4 20 6 20 9 13 8 13 10 12 11 11 13 10 14 11 21 8 22 4 19 2 19v15l-3 23-6 21-10 22-10 15-9 11-7 8-11 9-14 10-22 12-19 8-26 8h-2l-4 27-4 39-4 56-3 58-1 40-2 13-4 8-6 5-5 2h-107l-1-1v-209l1-44 1-1 14-3 12-5 11-8 8-9 7-15 4-18 1-19-3-24-5-20-7-20-8-16-8-14-11-13-7-7-12-6-8-1-12 3-11 8-11 13-8 13-9 17-9 24-5 21-2 15v22l3 17 5 13 7 11 8 8 14 8 14 4 6 2 1 1v252l-1 1-67 1h-42l-1-1-1-44v-151l1-80 11-8 6-9 3-8 2-9v-127h-9l-1 97-1 1h-5l-2-5v-94l-9 1-1 97-1 1h-6l-2-3v-96l-10 1-1 97-7 1v-99l-10 1v122l2 13 5 12 8 9 8 5v275l-2 1h-100l-8-2-6-4-4-7-2-11-2-91-2-45-3-34-5-35-4-20-12-3-14-4-21-8-21-11-14-10-14-12-8-8-12-16-10-18-8-21-4-17-2-16v-23l3-21 6-21 7-17 11-20 9-12 11-12 14-13 20-13 16-8 24-8 15-3 18-2h30l23 2h8l8-10 7-8 11-11 19-14 20-11 20-8 16-5z"
-          fill="#EC5212"
-        />
-        <path
-          transform="translate(744,1209)"
-          d="m0 0 4 1 7 11 15 25 15 26 13 22 3 6 3-1 15-26 13-22 17-29 7-11 2-2 4 1 2 13 11 112v4l-9 1h-13l-2-4-4-35-2-20v-6h-2l-2 5-14 25-8 13-10 17-6 8-5-5-15-25-14-24-8-13-1 3-6 59-3 2h-17l-4-1 1-18 9-90 2-18z"
-          fill="#110E0E"
-        />
-        <path
-          transform="translate(919,1211)"
-          d="m0 0h28l18 2 12 6 8 8 4 8 1 4v10l-6 12-7 6-1 2 6 2 9 7 6 10 2 7v10l-3 10-5 8-4 5-10 7-13 4-14 1h-50l-2-3v-125zm3 22v28h33l7-3 4-5 1-2v-8l-4-6-4-3-3-1zm0 47v38l22 1 16-1 8-4 5-6 2-5v-9l-3-6-5-5-6-2-10-1z"
-          fill="#161211"
-        />
-        <path
-          transform="translate(1375,1210)"
-          d="m0 0h22l12 3 16 8 12 11 7 10 5 11 3 11 1 16-3 16-5 12-8 11-5 5-7 6-8 5-14 5-12 2h-11l-15-3-10-4-12-8-9-9-7-11-5-12-2-9v-21l4-14 6-12 9-11 10-8 14-7zm5 23-11 3-10 6-8 8-5 10-2 6-1 13 3 13 6 10 4 5 9 6 9 4 5 1h15l12-4 10-7 7-8 5-12 1-6v-10l-3-12-6-10-4-5-11-7-8-3-6-1z"
-          fill="#0D0B0B"
-        />
-        <path
-          transform="translate(580,1211)"
-          d="m0 0h20l20 2 12 5 10 7 6 7 6 12 2 7v20l-4 12-7 10-7 7-2 1 2 6 14 28v4l-2 1h-20l-4-5-8-16-3-9h-37v29l-3 1h-18l-3-2v-125l1-1zm-2 21v58h32l10-4 6-5 6-11 1-12-3-10-4-6-7-6-7-3-5-1z"
-          fill="#151111"
-        />
-        <path
-          transform="translate(1168,1211)"
-          d="m0 0h25l17 2 12 5 10 7 8 10 5 12 1 4v20l-4 12-7 10-5 5-4 3 2 6 10 20 5 11-3 2h-20l-3-3-8-16-6-11h-35v29l-16 1-7-1-1-3v-121l1-3zm0 21v58h32l9-4 5-3 7-10 2-10-1-10-5-10-8-7-7-3-5-1z"
-          fill="#100C0B"
-        />
-        <path
-          transform="translate(1055,1211)"
-          d="m0 0h44l19 1 1 3v12l-1 6-2 1h-70v35l58 1v20l-1 1h-57v26h61l12 1 1 1v20l-16 1h-80l-2-5v-122l1-1z"
-          fill="#1C1614"
-        />
-        <path
-          transform="translate(1270,939)"
-          d="m0 0h12l7 6 3 7 1 6v11l-3 16-5 15-8 16-10 14-9 10-8 7-20 13h-3l1-6 6-14 9-29 7-33 3-17 5-12 6-7z"
-          fill="#EC5515"
-        />
-        <path
-          transform="translate(680,1040)"
-          d="m0 0h14l8 5 7 8 7 12 10 21 14 23 8 11 10 13 7 9-2 2-21-6-21-10-12-9-10-9-7-7-9-13-7-12-4-11-1-11 2-9 5-6z"
-          fill="#EC5414"
-        />
-        <path
-          transform="translate(683,1211)"
-          d="m0 0h21l2 1v127l-9 1h-13l-2-3v-125z"
-          fill="#231D1B"
-        />
-        <path
-          transform="translate(1275,1211)"
-          d="m0 0h21l1 1v127l-12 1h-10l-2-1v-127z"
-          fill="#242323"
-        />
-        <path
-          transform="translate(1297,1388)"
-          d="m0 0 7 6 9 9 7 8 14 15 9 9 7 8 4 5 1-59h8l1 2v77l-4-1-15-15-7-8-7-7-7-8-14-15-4-5-2 59h-7l-1-1v-78z"
-          fill="#231C1A"
-        />
-        <path
-          transform="translate(1107,1389)"
-          d="m0 0h34l9 3 10 9 5 10 1 8-2 10-5 8-5 5-1 5 8 16 1 5-8-1-10-19h-28l-1 1v17l-2 2h-6l-1-1v-77zm9 7-1 1v43h25l7-3 5-4 4-7v-14l-4-8-9-6-3-1-13-1z"
-          fill="#372D2B"
-        />
-        <path
-          transform="translate(556,1389)"
-          d="m0 0h33l10 3 8 6 6 10 2 7-1 11-5 10-7 7 1 5 8 17-1 3-7-1-10-19-29-1-1 20-1 1h-6l-1-1v-77zm9 7-1 1-1 40 1 3h25l7-3 5-4 4-8 1-8-3-10-5-6-9-4-13-1z"
-          fill="#2B1F1C"
-        />
-        <path
-          transform="translate(651,1389)"
-          d="m0 0h56l1 1v6l-1 1-47 1v32h39l1 1v6l-1 1-39 1v20l48 1 1 1v6l-19 1h-38l-1-1z"
-          fill="#352D2B"
-        />
-        <path
-          transform="translate(1e3 1389)"
-          d="m0 0h8l1 51 3 9 5 6 9 4h12l8-4 6-6 2-6 1-23v-29l1-2h8l1 4-1 51-4 10-7 8-9 5-5 1h-15l-11-4-5-4-6-10-3-12v-48z"
-          fill="#2B2524"
-        />
-        <path
-          transform="translate(936,1388)"
-          d="m0 0h3l10 23 12 28 11 26-1 3-7-1-4-6-1-4h-45l-3 10-7 1-2-1 3-9 5-12 18-42zm1 17-7 14-7 17-5 12 1 1h36l-1-5-15-37z"
-          fill="#2A2322"
-        />
-        <path
-          transform="translate(1228,1388)"
-          d="m0 0h3l9 21 13 30 11 26-1 3-7-1-3-4-2-6h-45l-3 10-7 1-2-1 1-4 6-15 11-26 5-11zm1 17-3 5-11 26-5 12 1 1h36l-1-5-12-30-4-9z"
-          fill="#2A2422"
-        />
-        <path
-          transform="translate(761,1388)"
-          d="m0 0h11l10 3 6 4 1 4-2 4-6-1-8-4-11-1-8 4-2 3v7l3 5 14 7 14 6 9 8 2 4v10l-3 7-4 5-8 4-4 1h-16l-11-4-8-7-1-4 2-3h5l7 6 8 3h14l6-4 3-5v-7l-4-5-18-8-12-6-6-7-2-6 1-10 4-6 7-5z"
-          fill="#302928"
-        />
-        <path
-          transform="translate(1016,769)"
-          d="m0 0h1l-1 20v45l3 16 5 13 6 9 11 9 9 5 1 4-1 1h-7l-13-5-8-6-8-8-8-16-3-13-1-9v-13l2-18 4-16 5-14z"
-          fill="#ED6127"
-        />
-        <path
-          transform="translate(1397,1389)"
-          d="m0 0h55l1 5-1 2-23 1v70l-7 1-2-1-1-70-22-1-1-1v-5z"
-          fill="#332520"
-        />
-        <path
-          transform="translate(822,1389)"
-          d="m0 0h55l1 5-1 2-23 1v70l-6 1-3-1v-70l-23-1-1-1v-5z"
-          fill="#594B46"
-        />
-        <path
-          transform="translate(678,1131)"
-          d="m0 0 9 2 25 12 19 9 1 3-11 1h-25l-11-3-8-6-5-6v-8l2-3z"
-          fill="#EC591B"
-        />
-        <path
-          transform="translate(1305,1024)"
-          d="m0 0h6l4 6v6l-6 10-8 7-15 6-19 5h-6l1-3 8-6 12-12 8-7 9-8z"
-          fill="#EC581A"
-        />
-        <path
-          transform="translate(1347,1222)"
-          d="m0 0m-2 1 2 1-14 14v-3l9-10z"
-          fill="#9B7D72"
-        />
-        <path
-          transform="translate(1277,1048)"
-          d="m0 0m-1 1m-1 1m-1 1m-1 1m-1 1m-1 1m-1 1m-1 1m-1 1m-1 1m-2 1 2 1-2 2 2 2h-6l1-3z"
-          fill="#F49D79"
-        />
-      </svg>
-    </a>
-    
-    <button
-      class="navbar-toggler d-lg-none"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapsibleNavId"
-      aria-controls="collapsibleNavId"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="" aria-current="page"
-            >Accueil <span class="visually-hidden">(current)</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Boutique</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Produit</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
+<nav id="navbar" class="navbar navbar-expand-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="70" viewBox="0 0 319 120" version="1.1">
+                <path d="M 280.433 2.462 C 279.546 3.816, 278.580 6.711, 278.287 8.896 C 277.846 12.183, 278.380 13.987, 281.377 19.347 C 285.514 26.745, 285.930 30.962, 282.996 35.774 C 281.898 37.575, 281 39.712, 281 40.524 C 281 43.273, 284.883 42.020, 287.663 38.375 C 291.815 32.932, 291.492 26.624, 286.587 17.356 L 282.806 10.212 284.513 6.614 C 287.332 0.674, 283.896 -2.823, 280.433 2.462 M 293.886 4.525 C 291.368 10.217, 291.852 13.764, 295.999 20 C 299.745 25.633, 300.113 32.315, 296.904 36.395 C 294.532 39.411, 294.986 42, 297.887 42 C 300.254 42, 303.891 36.450, 304.669 31.649 C 305.320 27.638, 303.686 22.079, 300.252 16.621 C 298.344 13.588, 297.948 11.951, 298.436 9.121 C 299.677 1.923, 299.569 0.569, 297.728 0.200 C 296.434 -0.059, 295.398 1.108, 293.886 4.525 M 308.831 2.750 C 305.501 8.473, 305.673 10.988, 309.973 19.446 C 312.188 23.804, 314 28.259, 314 29.346 C 314 30.434, 312.852 33.283, 311.450 35.676 C 308.758 40.268, 308.907 42, 311.991 42 C 314.940 42, 318.308 36.338, 318.778 30.592 C 319.135 26.219, 318.686 24.545, 315.597 18.736 C 311.581 11.184, 311.355 9.760, 313.517 5.615 C 314.652 3.439, 314.743 2.395, 313.888 1.365 C 312.164 -0.712, 310.596 -0.283, 308.831 2.750 M 251.315 19.464 C 247.515 21.116, 245 25.532, 245 30.550 C 245 33.344, 245.772 34.972, 248.292 37.492 L 251.583 40.783 249.356 43.373 C 246.269 46.962, 245.757 51.856, 246.154 73.963 L 246.500 93.166 249.766 96.083 C 254.178 100.024, 258.821 100.025, 263.234 96.084 L 266.500 93.168 266.831 73.865 C 267.212 51.627, 266.723 46.953, 263.644 43.373 L 261.417 40.783 264.708 37.492 C 267.228 34.972, 268 33.344, 268 30.550 C 268 25.494, 265.712 21.566, 261.643 19.635 C 257.502 17.670, 255.515 17.637, 251.315 19.464 M 20.205 20.833 C 9.076 24.806, 2.526 33.023, 0.850 45.112 C 0.289 49.166, -0.020 61.637, 0.165 72.825 L 0.500 93.167 3.766 96.083 C 8.159 100.007, 12.824 100.023, 17.182 96.128 C 20.302 93.341, 20.409 92.977, 20.815 83.685 L 21.234 74.113 24.058 76.201 C 26.434 77.957, 27.831 78.202, 32.869 77.746 C 43.885 76.747, 54.093 69.046, 57.446 59.205 C 59.270 53.851, 59.470 44.302, 57.870 38.962 C 53.472 24.280, 35.193 15.483, 20.205 20.833 M 27 39.669 C 26.175 39.991, 24.488 41.176, 23.250 42.302 C 21.239 44.132, 21 45.292, 21 53.247 L 21 62.145 23.635 60.073 C 25.141 58.888, 27.744 58, 29.712 58 C 37.420 58, 41.829 48.326, 36.750 42.555 C 34.483 39.979, 29.776 38.586, 27 39.669 M 81.951 41.303 C 75.469 43.135, 70.466 46.510, 66.469 51.745 C 62.298 57.207, 60.812 62.231, 60.877 70.653 C 60.997 86.293, 73.623 99, 89.043 99 C 94.145 99, 98.972 96.188, 99.035 93.177 C 99.061 91.946, 99.423 92.135, 100.396 93.890 C 103.557 99.594, 111.458 100.696, 116.077 96.077 L 119 93.154 119 77.737 C 119 62.478, 118.968 62.255, 115.883 56.081 C 112.700 49.712, 107.910 45.224, 101.244 42.365 C 96.498 40.329, 87.204 39.817, 81.951 41.303 M 147.951 41.303 C 138.517 43.970, 130.398 51.648, 127.762 60.394 C 125.936 66.453, 126.017 111.787, 127.860 115.235 C 130.748 120.638, 138.221 121.562, 143.182 117.128 C 146.304 114.339, 146.408 113.981, 146.817 104.649 L 147.237 95.041 149.753 97.021 C 152.917 99.509, 159.786 99.633, 166.563 97.324 C 173.172 95.072, 181.072 87.172, 183.324 80.563 C 188.660 64.901, 181.802 48.609, 167.244 42.365 C 162.498 40.329, 153.204 39.817, 147.951 41.303 M 199.357 40.951 C 193.576 43.393, 192.024 52.752, 196.636 57.364 C 198.829 59.557, 200.175 60, 204.636 60 C 207.586 60, 210 60.234, 210 60.519 C 210 60.805, 206.797 64.742, 202.882 69.269 C 190.547 83.532, 187.160 92.117, 192.102 96.595 C 193.979 98.296, 196.172 98.533, 212.534 98.811 C 227.397 99.063, 231.417 98.836, 233.791 97.608 C 237.427 95.728, 239.437 91.144, 238.595 86.654 C 237.664 81.690, 234.753 79.583, 228.021 79 L 222.249 78.500 230.100 69.120 C 237.786 59.936, 243 51.344, 243 47.859 C 243 46.898, 241.915 44.849, 240.588 43.306 L 238.177 40.500 219.838 40.273 C 209.752 40.148, 200.536 40.453, 199.357 40.951 M 86.357 60.992 C 83.179 62.274, 81 65.973, 81 70.086 C 81 74.705, 84.945 79, 89.186 79 C 92.509 79, 97.571 81.341, 98.331 83.229 C 98.612 83.928, 98.878 80.533, 98.921 75.684 C 99.012 65.581, 98.171 63.387, 93.452 61.415 C 89.620 59.814, 89.319 59.796, 86.357 60.992 M 152.357 60.992 C 148.259 62.645, 147 65.869, 147 74.708 L 147 82.971 150.250 80.989 C 152.037 79.899, 154.703 79.006, 156.173 79.004 C 160.420 78.998, 165 74.506, 165 70.345 C 165 65.581, 163.449 63.086, 159.452 61.415 C 155.620 59.814, 155.319 59.796, 152.357 60.992"
+                      stroke="none" fill="#fffcfc" fill-rule="evenodd"/>
+                <path d="" stroke="none" fill="#fcfcfc" fill-rule="evenodd"/>
+            </svg>
+        </a>
+
+        <button
+                class="navbar-toggler d-lg-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId"
+                aria-controls="collapsibleNavId"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" aria-current="page"
+                    >ACCUEIL <span class="visually-hidden">(current)</span></a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('boutique') }}">BOUTIQUE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PRODUIT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">CONTACT</a>
+                </li>
+            </ul>
+        </div>
+        <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarSupportedContent"
+        >
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            data-bs-toggle="offcanvas"
+                            href="#offcanvasRight"
+                            role="button"
+                            aria-controls="offcanvasExample"
+                    >
+                        <i class="fa-solid fa-search"></i>
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalId">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" id="heart" href="#">
+                        <i class="fa-solid fa-heart"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cart') }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                 <span id="cart-count">{{ session.get('cart_count', 0) }}</span>
+                <span class="visually-hidden">unread messages</span>
+              </span>
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-    <div
-      class="collapse navbar-collapse justify-content-end"
-      id="navbarSupportedContent"
-    >
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            data-bs-toggle="modal"
-            data-bs-target="#modalId"
-          >
-            <i class="fa-solid fa-search"></i>
-          </a>
-        </li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="fa-solid fa-user"></i>
-          </a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa-solid fa-circle-user"></i>
-          </a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa-solid fa-heart"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
-        </li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
 </nav>

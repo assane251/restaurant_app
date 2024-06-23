@@ -1,9 +1,118 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Register
+    Papzi
 {% endblock %}
 
 {% block content %}
+    {% include 'includes/_casourel.html' %}
+    <div class="container-fluid" style="background-color: whitesmoke;">
+        <div id="productCarousel" class="carousel-unique slide p-5">
+            <div class="carousel-inner" style="padding: 0; margin: 0;">
+                {% for i in range(0, 5) %}
+                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                        <div class="d-flex justify-content-between">
+                            {% for plat in plats[:5] %}
+                                <div class="circle-div" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)">
+                                    <img src="{{ url_for('static', filename=plat.image) }}" alt="Product Image">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row container-fluid">
+        <div class="row align-items-start">
+            <div class="col col-md-3 zoom-background"
+                 style="--bg-image: url('{{ url_for('static', filename='image/bloc2.jpg') }}'); background-size: cover; color: #fff;
+                         display:flex; justify-content: center; align-items: start; flex-direction: column">
+                <h4>GROS BURGER
+                    PREMIUM</h4>
+                <span>Tout ce que vous commandez
+                        sera rapidement
+                        livré à votre porte.</span>
+                <h4>20 000 CFA</h4>
+            </div>
+            <div class="col col-md-6 zoom-background"
+                 style="--bg-image: url('{{ url_for('static', filename='image/bloc1.jpg') }}'); background-size: cover; color: #fff;
+                         display:flex; justify-content: center; align-items: start; flex-direction: column">
+                <h4>POULET BBQ</h4>
+                <span>Tout ce que vous commandez
+                        sera rapidement
+                        livré à votre porte.</span>
+                <h4>10 000 CFA</h4>
+            </div>
+            <div class="col col-md-3 zoom-background"
+                 style="--bg-image: url('{{ url_for('static', filename='image/bloc6.jpg') }}'); background-size: cover; color: #fff;
+                         display:flex; justify-content: center; align-items: start; flex-direction: column">
+                <h4>COMBO
+                    ENFANTS</h4>
+                <span>Tout ce que vous commandez
+                            sera rapidement
+                            livré à votre porte.</span>
+                <h4>24 000 CFA</h4>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="row align-items-start">
+                <div class="col col-md-6 zoom-background"
+                     style="--bg-image: url('{{ url_for('static', filename='image/bloc5.jpg') }}'); background-size: cover; color: #fff;
+                             display:flex; justify-content: center; align-items: start; flex-direction: column;">
+                    <h3>OFFRE DE BOISSONS</h3>
+                    <p>Achetez 2 grandes pizz et obtenez un Pepsi de 1,5 L gratuit</p>
+                    <a href="#" class="btn1 light">COMMENDER MAINTENANT</a>
+                </div>
+                <div class="col col-md-3 zoom-background"
+                     style="--bg-image: url('{{ url_for('static', filename='image/bloc4.jpg') }}'); background-size: cover; background-position: right center; background-repeat: no-repeat; color: #fff;
+                             display:flex; justify-content: center; align-items: start; flex-direction: column">
+                    <h3>PIZZA COMBINÉE</h3>
+                    <p>Achetez 2 grandes pizzas et obtenez un Pepsi de 1,5 L gratuit</p>
+                    <a href="#" class="btn1 light">LIVRAISON GRATUITE</a>
+                </div>
+                <div class="col col-md-3 zoom-background"
+                     style="--bg-image: url('{{ url_for('static', filename='image/bloc3.jpg') }}'); background-size: cover; color: #000;
+                             display:flex; justify-content: center; align-items: start; flex-direction: column">
+                    <h3>EXPLORER
+                        LA NOURRITURE</h3>
+                    <p>Commandez votre plat préféré aujourd'hui</p>
+                    <a href="#" class="btn1 default">VOIR PLUS</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container mt-4">
+        <div class="row">
+            {% for plat in plats %}
+                <div class="col-md-4 mb-4">
+
+                    <div class="card" style="line-height: 1">
+                        <img src="{{ url_for('static', filename=plat.image) }}" class="card-img-top"
+                             alt="{{ plat.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ plat.nom }}</h5>
+                            <p class="card-text">{{ plat.description }}</p>
+                            <p class="text-muted">Prix: {{ plat.prix }} CFA</p>
+                            <form action="{{ url_for('add_to_cart') }}" method="POST"
+                                  class="add-to-cart-form">
+                                <input type="hidden" name="nom" value="{{ plat.nom }}">
+                                <input type="hidden" name="description" value="{{ plat.description }}">
+                                <input type="hidden" name="image" value="{{ plat.image }}">
+                                <input type="hidden" name="prix" value="{{ plat.prix }}">
+                                <button type="submit" class="btn btn-primary acheter-btn"
+                                        style="margin-top: -5px">
+                                    Acheter
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 3 == 0 %}
+                    <div class="row"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

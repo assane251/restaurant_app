@@ -1,0 +1,17 @@
+<div class="carousel-container" id="carouselContainer">
+    <div class="carousel">
+        <div class="carousel-slide"
+             style="background-image: url('{{ url_for('static', filename='image/carousel.jpg') }}');">
+            {% include "includes/_navbar.html" %}
+            <div style="">
+                <div class="carousel-content">
+                        <h1 class="arc-title">PIZZA ITALIANO  POCA</h1>
+                    <p>Acheter 2 grandes pizzas et obtenez un pepsi de 1.5L gratuit.</p>
+                    <a href="#" class="btn2 yellow">COMMANDER MAINTENANT</a>
+                </div>
+
+                <img style="margin-left: 800px; margin-top: 4%" src="{{ url_for('static', filename='image/casourel1.png') }}" alt="Layer" id="image-carousel">
+            </div>
+        </div>
+    </div>
+</div>

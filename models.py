@@ -1,7 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy
+
 from sqlalchemy import Column, Integer, String, Text, Boolean, DECIMAL, ForeignKey, DateTime
 from flask_login import UserMixin
 import datetime
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
