@@ -251,12 +251,9 @@ def create_commande():
         date_commande = datetime.utcnow()
         statut = "En Cours"
         commande = Commande(user_id=user_id, date_commande=date_commande, statut=statut)
-        selectplats = request.form.getlist('nomselectplat')#sera une select de choix mais stocke chaque plat dans une liste
         db.session.add(commande)
         db.session.commit()
-        disponible_plats = Plat.query.filter_by(disponibilite = True).all()#get plat dispo
-        plats_dict = {plat.id: plat for plat in disponible_plats}#chaque plat sur une liste
-        #Apres on discute pour la suite
+        
     else: 
         flash('message', 'erreur')
         
