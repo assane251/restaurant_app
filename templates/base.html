@@ -21,83 +21,15 @@
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 </head>
 
-<<<<<<< HEAD
 <body>
 {% block content %}
 
 {% endblock %}
-=======
-  <body>
-    
-    {% include "modals.html" %}
-    
-    <div class="carousel-container" id="carouselContainer">
-      
-      <div class="carousel">
-        
-          <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='image/image1.jpg') }}');">
-            {% include "includes/_navbar.html" %}
-            <div class="carousel-content">
-                  <h1 class="arc-title">MEILLEUR RESTAURANT</h1>
-                  <p>Description for the first image.</p>
-                  <a href="#" class="btn">Learn More</a>
-              </div>
-          </div>
->>>>>>> origin/master
 
 {% include 'includes/_footer.html' %}
 
-<<<<<<< HEAD
 <!-- Bootstrap JavaScript Libraries -->
 <script
-=======
-          <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/image3.jpg') }}');">
-              <div class="carousel-content">
-                  <h2>Title 3</h2>
-                  <p>Description for the third image.</p>
-                  <a href="#" class="btn">VOIR</a>
-              </div>
-          </div>
-      </div>
-      
-      <button class="carousel-button" id="prevButton">&#10094;</button>
-      <button class="carousel-button" id="nextButton">&#10095;</button>
-      
-      
-  </div>
-
-  <div class="container mt-4">
-    <div class="row">
-        {% for uneplat in plats[:3] %}
-            <div class="col-md-4 mb-4">
-              
-                <div class="card h-100">
-                    <img src="{{ url_for('static', filename=uneplat.image) }}" class="card-img-top" alt="{{ uneplat.nom }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ uneplat.nom }}</h5>
-                        <p class="card-text">{{ uneplat.description }}</p>
-                        <p class="text-muted">Prix: {{ uneplat.prix }} CFA</p>
-                        <form action="{{ url_for('add_to_cart') }}" method="POST" class="add-to-cart-form">
-                          <input type="hidden" name="nom" value="{{ uneplat.nom }}">
-                          <input type="hidden" name="description" value="{{ uneplat.description }}">
-                          <input type="hidden" name="image" value="{{ uneplat.image }}">
-                          <input type="hidden" name="prix" value="{{ uneplat.prix }}">
-                          <button type="submit" class="btn btn-primary acheter-btn">Acheter</button>
-                      </form>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <button type="submit" class="btn btn-primary acheter-btn">TOUS LES PRODUITS</button>
-</div>
-    
-    
-    <!-- Bootstrap JavaScript Libraries -->
-    
-    <!-- Bootstrap JavaScript Libraries -->
-    <script
->>>>>>> origin/master
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
