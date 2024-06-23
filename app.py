@@ -255,8 +255,6 @@ def create_commande():
         
     else: 
         flash('message', 'erreur')
-        
-        
     return render_template(url_for('create_commande.html'))
 
 
