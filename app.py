@@ -100,7 +100,6 @@ def register():
               db.session.add(new_user)
               db.session.commit()
               flash({'message': 'Votre inscription a reussit'})
-              print('Utlisateur ajouter avec suces')
               return redirect(url_for('index'))
             except:
               flash({'message': 'erreur'})
@@ -211,8 +210,22 @@ def add_to_cart():
     session['cart_count'] = len(cart)
     return jsonify({'count': session['cart_count']})
 
-@app.route('/cart')
+@app.route('/cart', methods=['POST','GET'])
 def cart():
+    if request.method == 'POST': 
+        if current_user.is_authenticated: 
+            flash({'message': f'Merci {nom} {prenom} pour votre commande'})
+            print('Compte existe')
+        else:
+            nom = request.form.get('nom')
+            prenom = request.form.get('prenom')
+            email = request.form.get('email')
+            password = request.form.get('password')
+            new_user = User(nom=nom, prenom=prenom, email=email, password=generate_password_hash(password))
+            db.session.add(new_user)
+            db.session.commit()
+            flash({'message': f'Merci {nom} {prenom} Compte a ete creer'})
+            print('Compte a ete creer')
     cart = session.get('cart', [])
     return render_template('cart.html', cart=cart)
 
@@ -236,7 +249,7 @@ def create_commande():
     if request.method == ' POST': 
         user_id = current_user.id
         date_commande = datetime.utcnow()
-        statut = request.form.get('statut')
+        statut = "En Cours"
         commande = Commande(user_id=user_id, date_commande=date_commande, statut=statut)
         selectplats = request.form.getlist('nomselectplat')#sera une select de choix mais stocke chaque plat dans une liste
         db.session.add(commande)
