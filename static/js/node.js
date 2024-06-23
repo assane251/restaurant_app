@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 var slideLeft = {
     distance: '40%',
     opacity: null,
     origin: 'right',
     duration: 5000
 };
+=======
+document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.querySelector('.carousel');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const navbar = document.getElementById('navbar');
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    const cartLink = document.getElementById('cart-link');
+   
+    let currentIndex = 0;
+   
+>>>>>>> origin/master
 
 var slideUp = {
     origin: 'top',
@@ -11,8 +24,16 @@ var slideUp = {
     // timer: 1000
 }
 
+<<<<<<< HEAD
 ScrollReveal().reveal('.carousel-content', slideLeft);
 ScrollReveal().reveal('#image-carousel', slideUp);
+=======
+    function showSlide(index) {
+        const offset = -index * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+      
+    }
+>>>>>>> origin/master
 
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
@@ -140,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+<<<<<<< HEAD
    // Script pour activer la classe 'active' sur le lien cliqué
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function() {
@@ -147,8 +169,26 @@ document.querySelectorAll('.nav-link').forEach(link => {
         this.classList.add('active');
     });
 })
+=======
+
+  function zoomIn(element) {
+    element.style.boxShadow = '0 0 10px rgba(53, 53, 53, 0.8)'; // Shadow effect on hover with dark color
+    element.querySelector('img').style.transform = 'scale(1.1)'; // Zoom in image
+}
+
+function zoomOut(element) {
+    element.style.boxShadow = ''; // Remove shadow on mouse out
+    element.querySelector('img').style.transform = ''; // Reset image zoom
+}
+>>>>>>> origin/master
 
 document.querySelector('#heart').addEventListener('click', function(event) {
     event.preventDefault();
     this.querySelector('.fa-heart').classList.toggle('red');
+<<<<<<< HEAD
 });
+=======
+});
+
+ 
+>>>>>>> origin/master

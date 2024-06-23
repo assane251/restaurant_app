@@ -121,6 +121,8 @@ def register():
 #     return render_template('verify_email.html')
 
 
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST': 
@@ -139,7 +141,7 @@ def login():
             #flash({'message': 'email ou password incorrect'})
             
             return redirect(url_for('login'))
-    return render_template('login.html')
+    return render_template('modals.html')
 
 
 # @app.route('/google_login')
@@ -213,15 +215,24 @@ def cart():
 def contact():
     return render_template('contact.html')
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 @app.route('/boutique')
 def boutique():
+<<<<<<< HEAD
     return render_template('boutique.html')
+=======
+    
+    return render_template('boutique.html', plats=plats)
+>>>>>>> origin/master
 
 
 @app.route('/create_commande', methods=['GET', 'POST'])
 # @login_required
 def create_commande():
-    if request.method == 'POST': 
+    if request.method == ' POST': 
         user_id = current_user.id
         date_commande = datetime.utcnow()
         statut = request.form.get('statut')
