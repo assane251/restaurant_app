@@ -47,8 +47,13 @@ plats = [
         "nom": "Plat 3",
         "description": "Description du Plat 3",
         "image": "image/plat6.jpg",
-        "prix": 8.99,
-        
+        "prix": 8.99
+    },
+    { 
+        'nom': 'Plat 2',
+        'description': 'Description du Plat 2',
+        'image': 'image/prend1.jpg',
+        'prix': 12.99
     },
     {
         "nom": "Plat 2",
@@ -92,4 +97,10 @@ plats = [
         "image": "image/plat6.jpg",
         "prix": 8.99,
     },
+    {
+        'nom': 'Plat 3',
+        'description': 'Description du Plat 3',
+        'image': 'image/plat9.jpg',
+        'prix': 8.99
+    }
 ]

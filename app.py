@@ -52,6 +52,14 @@ client_secret = "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"
 google_bp = make_google_blueprint(
     client_id=client_id,
     client_secret=client_secret,
+    scope=['profile', 'email', 'https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/drive.readonly'],
+    redirect_to='http://localhost:5000/google_login/authorized'  
+)
+app.register_blueprint(google_bp, url_prefix="/google_login")
+
+google_bp = make_google_blueprint(
+    client_id=client_id,
+    client_secret=client_secret,
     scope=[
         "profile",
         "email",
@@ -60,7 +68,7 @@ google_bp = make_google_blueprint(
     ],
     redirect_to="http://localhost:5000/google_login/authorized",
 )
-app.register_blueprint(google_bp, url_prefix="/google_login")
+# app.register_blueprint(google_bp, url_prefix="/google_login")
 
 # oauth = OAuth(app)
 
@@ -75,19 +83,22 @@ def index():
 
     return render_template("index.html", plats=plats)
 
-
 def generate_verification_code():
     return "".join(str(random.randint(0, 9)) for _ in range(6))
 
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        nom = request.form.get("nom")
-        prenom = request.form.get("prenom")
-        email = request.form.get("email")
-        password = request.form.get("password")
 
+
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST': 
+        nom = request.form.get('nom')
+        prenom = request.form.get('prenom')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
         verification_code = generate_verification_code()
         print("verification_code")
 
@@ -103,6 +114,13 @@ def register():
         if user:
             flash({"message": "ce email a deja un compte"})
             return redirect(url_for("login"))
+            return flash({'message': 'Vous devez remplir tous les champs'})
+        
+        user = User.query.filter_by(email=email).first()
+        
+        if user: 
+            flash({'message': 'ce email a deja un compte'})
+            return redirect(url_for('login'))
         else:
             new_user = User(
                 nom=nom,
@@ -118,8 +136,9 @@ def register():
             except:
                 flash({"message": "erreur"})
                 print("erreur")
-
-    return render_template("register.html")
+              
+              
+    return render_template('register.html')
 
 
 # @app.route('/verify', methods=['GET', 'POST'])
@@ -159,14 +178,14 @@ def login():
     return render_template("modals.html")
 
 
-@app.route("/google_login")
+@app.route('/google_login')
 def google_login():
     if not google.authorized:
-        return redirect(url_for("google.login"))
+        return redirect(url_for('google.login'))
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
-        flash("Échec de la connexion Google", "danger")
-        return redirect(url_for("login"))
+        flash("Échec de la connexion Google", 'danger')
+        return redirect(url_for('login'))
 
     user_info = resp.json()
     email = user_info["email"]
@@ -180,18 +199,6 @@ def google_login():
     login_user(user)
     flash("Vous êtes connecté avec Google", "success")
     return redirect(url_for("index"))
-
-
-@app.route("/google_login/authorized")
-def google_authorized():
-    resp = google.authorized_response()
-    if resp is None or resp.get("access_token") is None:
-        return "Access denied: reason={} error={}".format(
-            request.args.get("error_reason"), request.args.get("error_description")
-        )
-    session["google_token"] = (resp["access_token"], "")
-    user_info = google.get("userinfo")
-    return user_info.json()
 
 
 @app.route("/logout")
@@ -264,6 +271,8 @@ def blog():
 def boutique():
 
     return render_template("boutique.html", plats=plats)
+    
+    return render_template('boutique.html', plats=plats)
 
 
 @app.route("/create_commande", methods=["GET", "POST"])
@@ -283,7 +292,7 @@ def create_commande():
     return render_template(url_for("create_commande.html"))
 
 
-if __name__ == "_main_":
+if __name__ == '_main_':
     with app.app_context():
         try:
             # Créer toutes les tables définies dans les modèles
@@ -291,4 +300,5 @@ if __name__ == "_main_":
             print("Connexion réussie à la base de données !")
         except Exception as e:
             print("Erreur lors de la connexion à la base de données :", e)
+
     app.run(debug=True)

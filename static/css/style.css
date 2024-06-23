@@ -15,6 +15,8 @@ html {
   width: 100%;
   padding: 1em;
   background-color: transparent;
+  background: none;
+  background-color: transparent;
   color: white;
   /* text-align: center; */
   z-index: 1000;
@@ -37,9 +39,14 @@ html {
   left: 0;
   width: 100%;
   height: 2px;
+  /*background-color: red;*/
+  border-bottom: 1px solid #fff;
+  transition: width 0.3s ease-in-out, border-bottom-color 0.3s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+  height: 2px;
   background-color: red;
-  /* border-bottom: 1px solid #fff;
-    transition: width 0.3s ease-in-out, border-bottom-color 0.3s ease-in-out; */
+  transition: width 0.3s ease-out, background-color 0.3s ease-out;
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -205,6 +212,16 @@ div.align-items-start .col {
   margin: 0.5em 0;
 }
 
+/* Style pour l'animation de zoom */
+
+/*.zoomed {*/
+/*    transform: scale(1.1); !* Zoom de l'image *!*/
+/*}*/
+
+/* .zoomed {
+    transform: scale(1.1);
+} */
+
 .btn {
   display: inline-block;
   padding: 0.75em 1.5em;
@@ -247,6 +264,9 @@ div.align-items-start .col {
   font-weight: bold; /* Gras */
 }
 
+.arc-title :hover {
+  color: red; /* Gras */
+}
 .arc-title :hover {
   color: red; /* Gras */
 }
@@ -881,4 +901,520 @@ a:hover {
   /* .footer-content-column {
         width: 49.99%;
     } */
+}
+.form-container:hover {
+  transform: scale(1.05);
+}
+
+.form-control {
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+}
+
+.navbar-custom {
+  background: red;
+}
+
+.card-img-top {
+  width: 100%;
+  /* height: 180px; */
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out; /* Smooth zoom effect */
+}
+.card-img-top:hover {
+  transform: scale(1.09); /* Zoom in on hover */
+}
+.navbar .cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.navbar .cart .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+}
+
+.navbar-custom {
+  background-color: whitesmoke;
+}
+
+.zoom-effect {
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoom-effect:focus {
+  transform: scale(1.1);
+}
+
+/* Animation de fondu */
+.form-animation {
+  display: none;
+}
+
+.fade-top {
+  animation: fadeTop 0.5s ease-out;
+}
+
+@keyframes fadeTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.google-btn {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-left: 110px;
+}
+
+.google-btn img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.main-carousel-content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+.circle-div {
+  width: 150px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-radius 0.3s ease-out;
+}
+
+.circle-div:hover {
+  border: 1px solid red;
+  border-radius: 50%;
+}
+
+.circle-div img {
+  width: 50px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.carousel-inner {
+  width: 50%;
+  margin: 0 150px;
+  height: 200px;
+  justify-content: center;
+  left: 15%;
+}
+
+.breadcrumb {
+  margin-bottom: 20px; /* Adjust margin to reduce space */
+}
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
+  /* background: rgba(0,0,0,0.5); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15.5%;
+  transform: translateY(-50%);
+  margin: 0 40px;
+}
+.carousel-control-prev {
+  margin-left: 18%;
+}
+.carousel-control-next {
+  left: 77%;
+}
+
+.carousel-control-prev {
+  left: 20px; /* 20px away from the left side of the carousel */
+}
+
+.carousel-control-next {
+  right: 20px; /* 20px away from the right side of the carousel */
+}
+
+/*css boutique */
+
+.blog-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.blog-entry img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+.blog-entry .blog-info {
+  display: flex;
+  flex-direction: column;
+}
+.btn-custom {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: color 0.4s, background-color 0.4s;
+  z-index: 1;
+}
+
+.btn-custom:before,
+.btn-custom:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  transition: all 0.4s;
+  border-radius: 50%;
+  z-index: 0;
+  background-color: red;
+}
+
+.btn-custom:hover {
+  color: white;
+  background-color: red;
+}
+
+.btn-custom .btn-content {
+  position: relative;
+  z-index: 1;
+}
+
+button#btn:hover {
+  opacity: 0.6;
+}
+
+span {
+  color: #999;
+  padding-left: 5px;
+}
+
+hr {
+  border: none;
+  border-left: 1px solid #000;
+  height: 4px;
+  width: 1px;
+  margin: 0 20px;
+}
+
+.card-body > i {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+  margin-left: 5px;
+  color: #999;
+}
+
+a:hover {
+  color: red;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a,
+.pagination span {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: black;
+  background-color: lightgray;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover,
+.pagination .active {
+  background-color: black;
+  color: white;
+}
+.product-card {
+  text-align: center;
+  background: none;
+  padding: 20px;
+  border-radius: 10px;
+  height: 370px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  transition: transform 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  background-color: white;
+  border-radius: 20px;
+  font-size: 1rem;
+  width: 100px;
+  height: 40px;
+  box-shadow: 0 4px 8px dark;
+  border: 1px solid white;
+  cursor: pointer;
+  position: absolute;
+  left: 30%;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+}
+.product-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+
+  background-color: white;
+  border: 1px solid white;
+  color: #007bff;
+  border-radius: 20px;
+  font-size: 1rem;
+  width: 120px;
+  height: 40px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.product-button:hover {
+  background-color: red;
+  color: transparent; /* Cache le texte */
+  border: 1px solid red;
+}
+
+.product-button:before {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  transition: left 0.4s ease;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.product-button:hover:before {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product-card:hover button {
+  border-color: black;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a,
+.pagination span {
+  display: block;
+  padding: 10px 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: black;
+  background-color: lightgray;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover,
+.pagination .active {
+  background-color: black;
+  color: white;
+}
+.heart-icon {
+  position: absolute;
+  top: 2px;
+  left: 228px;
+  color: whitesmoke;
+  font-size: 20px;
+  z-index: 10;
+}
+.heart-icon:hover {
+  color: red;
+}
+.promo-icon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 40px;
+  height: 40px;
+  background-color: #f8f9fa; /* Couleur de fond par défaut */
+  color: transparent; /* Couleur du texte par défaut */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10;
+  transition: background-color 0.4s, color 0.4s;
+}
+.product-card:hover .promo-icon {
+  background-color: red;
+  color: white;
+}
+
+/* Css contact */
+
+.unique-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.unique-row {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.unique-col-md-6 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.unique-form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.unique-image-container {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.5s ease-in-out;
+}
+
+.unique-image-container h2,
+.unique-image-container p {
+  margin: 0;
+}
+
+.unique-image-container h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.unique-image-container p {
+  font-size: 1.2rem;
+}
+
+/* Transitions pour l'effet de déplacement */
+.unique-form-column.translate-right {
+  transform: translateX(50%);
+}
+
+.unique-image-column.translate-left {
+  transform: translateX(-50%);
+}
+.unique-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.description-column {
+  flex-basis: 25%; /* 1/4 de la largeur */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.map-column {
+  flex-basis: 75%; /* 3/4 de la largeur */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.map {
+  width: -75%; /* La carte occupe toute la largeur de la colonne */
+  height: 400px; /* Hauteur de la carte ajustée */
 }
