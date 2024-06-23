@@ -257,7 +257,7 @@ def contact():
 
 @app.route("/blog")
 def blog():
-    return render_template("blog.html")
+    return render_template("blog.html", plats=plats)
 
 
 @app.route("/boutique")
