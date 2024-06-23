@@ -35,9 +35,12 @@ class Commande(db.Model):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     date_commande = Column(DateTime, default=datetime.datetime.utcnow)
     statut = Column(String(50), nullable=False, default='En cours')
-
+    adresse_livraison = Column(Text, nullable=True)
+    telephone = Column(String(20), nullable=True)
+    
     user = relationship('User', back_populates='commandes')
     commande_plats = relationship('CommandePlat', back_populates='commande')
+    paiement = relationship('Paiement', back_populates='commande', uselist=False, cascade="all, delete-orphan")
 
 class CommandePlat(db.Model):
     __tablename__ = 'commande_plats'
@@ -49,3 +52,15 @@ class CommandePlat(db.Model):
 
     commande = relationship('Commande', back_populates='commande_plats')
     plat = relationship('Plat', back_populates='commande_plats')
+class Paiement(db.Model):
+    __tablename__ = 'paiements'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    commande_id = Column(Integer, ForeignKey('commandes.id'), nullable=False)
+    montant = Column(DECIMAL(10, 2), nullable=False)
+    methode_paiement = Column(String(50), nullable=False)  # e.g., 'Carte de crédit', 'PayPal'
+    statut = Column(String(50), nullable=False, default='En attente')  # e.g., 'Réussi', 'Échoué'
+    date_paiement = Column(DateTime, default=datetime.datetime.utcnow)
+
+    commande = relationship('Commande', back_populates='paiement')
+
+Commande.paiement = relationship('Paiement', back_populates='commande', uselist=False, cascade="all, delete-orphan")
