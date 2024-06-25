@@ -231,8 +231,11 @@ def add_to_cart():
     return jsonify({"count": session["cart_count"]})
 
 
-# @app.route("/cart", methods=["POST", "GET"])
-# def cart():
+@app.route("/cart", methods=["POST", "GET"])
+def cart():
+     
+    cart = session.get("cart", [])
+    return render_template("cart.html", cart=cart)
 #     if request.method == "POST":
 #         if current_user.is_authenticated:
 #             flash({"message": f"Merci  pour votre commande"})
@@ -252,8 +255,7 @@ def add_to_cart():
 #             db.session.commit()
 #             flash({"message": f"Merci Compte a ete creer"})
 #             print("Compte a ete creer")
-#     cart = session.get("cart", [])
-#     return render_template("cart.html", cart=cart)
+    
 
 
 @app.route("/contact")
