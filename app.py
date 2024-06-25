@@ -114,7 +114,6 @@ def register():
         if user:
             flash({"message": "ce email a deja un compte"})
             return redirect(url_for("login"))
-            return flash({'message': 'Vous devez remplir tous les champs'})
         
         user = User.query.filter_by(email=email).first()
         
@@ -175,7 +174,7 @@ def login():
             # flash({'message': 'email ou password incorrect'})
 
             return redirect(url_for("login"))
-    return render_template("modals.html")
+    return render_template("login.html")
 
 
 @app.route('/google_login')
@@ -232,29 +231,29 @@ def add_to_cart():
     return jsonify({"count": session["cart_count"]})
 
 
-@app.route("/cart", methods=["POST", "GET"])
-def cart():
-    if request.method == "POST":
-        if current_user.is_authenticated:
-            flash({"message": f"Merci  pour votre commande"})
-            print("Compte existe")
-        else:
-            nom = request.form.get("nom")
-            prenom = request.form.get("prenom")
-            email = request.form.get("email")
-            password = request.form.get("password")
-            new_user = User(
-                nom=nom,
-                prenom=prenom,
-                email=email,
-                password=generate_password_hash(password),
-            )
-            db.session.add(new_user)
-            db.session.commit()
-            flash({"message": f"Merci Compte a ete creer"})
-            print("Compte a ete creer")
-    cart = session.get("cart", [])
-    return render_template("cart.html", cart=cart)
+# @app.route("/cart", methods=["POST", "GET"])
+# def cart():
+#     if request.method == "POST":
+#         if current_user.is_authenticated:
+#             flash({"message": f"Merci  pour votre commande"})
+#             print("Compte existe")
+#         else:
+#             nom = request.form.get("nom")
+#             prenom = request.form.get("prenom")
+#             email = request.form.get("email")
+#             password = request.form.get("password")
+#             new_user = User(
+#                 nom=nom,
+#                 prenom=prenom,
+#                 email=email,
+#                 password=generate_password_hash(password),
+#             )
+#             db.session.add(new_user)
+#             db.session.commit()
+#             flash({"message": f"Merci Compte a ete creer"})
+#             print("Compte a ete creer")
+#     cart = session.get("cart", [])
+#     return render_template("cart.html", cart=cart)
 
 
 @app.route("/contact")
@@ -272,24 +271,26 @@ def boutique():
 
     return render_template("boutique.html", plats=plats)
     
-    return render_template('boutique.html', plats=plats)
 
 
-@app.route("/create_commande", methods=["GET", "POST"])
+@app.route("/commande", methods=["GET", "POST"])
 # @login_required
-def create_commande():
+def commande():
     if request.method == " POST":
-        user_id = current_user.id
-        date_commande = datetime.utcnow()
-        statut = "En Cours"
-        commande = Commande(user_id=user_id, date_commande=date_commande, statut=statut)
-        db.session.add(commande)
-        db.session.commit()
+        pass
+        # user_id = current_user.id
+        # date_commande = datetime.utcnow()
+        # statut = "En Cours"
+        # commande = Commande(user_id=user_id, date_commande=date_commande, statut=statut)
+        # db.session.add(commande)
+        # db.session.commit()
 
     else:
         flash("message", "erreur")
+    
+    cart = session.get("cart", [])
 
-    return render_template(url_for("create_commande.html"))
+    return render_template('commande.html', cart=cart)
 
 
 if __name__ == '_main_':

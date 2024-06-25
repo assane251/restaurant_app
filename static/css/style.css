@@ -1418,3 +1418,6 @@ a:hover {
   width: -75%; /* La carte occupe toute la largeur de la colonne */
   height: 400px; /* Hauteur de la carte ajustée */
 }
+.bg-whitesmoke {
+  background-color: whitesmoke;
+}

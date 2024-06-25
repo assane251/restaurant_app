@@ -147,3 +147,17 @@ document.querySelector('#heart').addEventListener('click', function(event) {
     event.preventDefault();
     this.querySelector('.fa-heart').classList.toggle('red');
 });
+
+function updateSelection() {
+    let checkboxes = document.querySelectorAll('input[name="plat"]:checked');
+    let count = checkboxes.length;
+    let totalPrice = 0;
+
+    checkboxes.forEach((checkbox) => {
+        let price = parseFloat(checkbox.closest('tr').querySelector('td:nth-child(4)').innerText);
+        totalPrice += price;
+    });
+
+    document.getElementById('selectedCount').innerText = count;
+    document.getElementById('totalPrice').innerText = totalPrice;
+}
