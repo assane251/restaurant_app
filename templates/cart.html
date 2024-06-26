@@ -1,45 +1,44 @@
-
-    
-    <div style="margin-top: 120px; margin-bottom: 22px;">
-        <h1 class="text-center" style="color: red;">
-            PANIER
-        </h1>
-    </div>
-    {% if cart %}
+<div style="margin-top: 120px; margin-bottom: 22px;">
+    <h1 class="text-center" style="color: red;">
+        PANIER
+    </h1>
+</div>
+{% if cart %}
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for plat in cart %}
-            <div class="col mb-4">
-                <div class="card h-100">
-                    <div class="row g-0">
-                        <div class="col-md-6">
-                            <img src="{{ url_for('static', filename=plat.image) }}" class="img-fluid rounded-start h-100" alt="{{ plat.nom }}">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ plat.nom }}</h5>
-                                <p class="card-text">{{ plat.description }}</p>
-                                <p class="card-text"><small class="text-muted">Prix: {{ plat.prix }} CFA</small></p>
-                                <a href="{{ url_for('commande') }}">
-                                <button type="button" class="btn btn-primary acheter-btn" data-bs-toggle="modal" data-bs-target="#orderModal">Commander</button>
-                                </a>
+                <div class="col mb-4">
+                    <div class="card h-100">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="{{ url_for('static', filename=plat.image) }}"
+                                     class="img-fluid rounded-start h-100" alt="{{ plat.nom }}">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ plat.nom }}</h5>
+                                    <p class="card-text">{{ plat.description }}</p>
+                                    <p class="card-text"><small class="text-muted">Prix: {{ plat.prix }} CFA</small></p>
+                                    <a href="{{ url_for('commande') }}">
+                                        <button type="button" class="btn btn-primary acheter-btn" data-bs-toggle="modal"
+                                                data-bs-target="#orderModal">Commander
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
-       
-
 
     </div>
-    {% else:  %}
+{% else: %}
     <h3 class="text-center" style="color: red;">
-      votre panier est vide
+        votre panier est vide
     </h3>
-    {% endif  %}
+{% endif %}
     
     
    
