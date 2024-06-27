@@ -145,7 +145,7 @@ function zoomOut(element) {
 
 document.querySelector('#heart').addEventListener('click', function(event) {
     event.preventDefault();
-    this.querySelector('.fa-heart').classList.toggle('red');
+    this.querySelector('.fa-heart').classList.toggle('text-warning');
 });
 
 function updateSelection() {

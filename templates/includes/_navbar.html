@@ -1,174 +1,217 @@
-<!-- @format -->
-
-<!-- <div
-  class="offcanvas offcanvas-end"
-  tabindex="-1"
-  id="offcanvasRight"
-  aria-labelledby="offcanvasRightLabel"
->
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="input-group my-2 p-1">
-      <label class="input-group-text" for="inputGroupFile02"
-        ><i class="fa-solid fa-search"></i
-      ></label>
-      <input type="text" class="form-control" id="search" />
+{# offcanvas recherche #}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSearch" aria-labelledby="offcanvasRightSearch"
+     style="width: 500px;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Rechercher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-  </div>
-</div> -->
-
-<div
-  class="modal fade"
-  id="modalId"
-  tabindex="-1"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  role="dialog"
-  aria-labelledby="modalTitleId"
-  aria-hidden="true"
->
-  <div
-    class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
-    role="document"
-  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitleId">Connexion</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">{% include "login.html" %}</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
+    <div class="offcanvas-body">
+        <div class="mb-3 d-flex justify-content-center align-items-center gap-2">
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Rechercher...">
+            <a href="" class="btn btn-primary" style="margin: -3px 0;"><i class="fa-solid fa-search"></i></a>
+        </div>
     </div>
-  </div>
 </div>
 
-<nav id="navbar" class="navbar navbar-expand-sm {% if request.endpoint == 'commande' %}bg-whitesmoke{% endif %}">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="120"
-        height="70"
-        viewBox="0 0 319 120"
-        version="1.1"
-      >
-        <path
-          d="M 280.433 2.462 C 279.546 3.816, 278.580 6.711, 278.287 8.896 C 277.846 12.183, 278.380 13.987, 281.377 19.347 C 285.514 26.745, 285.930 30.962, 282.996 35.774 C 281.898 37.575, 281 39.712, 281 40.524 C 281 43.273, 284.883 42.020, 287.663 38.375 C 291.815 32.932, 291.492 26.624, 286.587 17.356 L 282.806 10.212 284.513 6.614 C 287.332 0.674, 283.896 -2.823, 280.433 2.462 M 293.886 4.525 C 291.368 10.217, 291.852 13.764, 295.999 20 C 299.745 25.633, 300.113 32.315, 296.904 36.395 C 294.532 39.411, 294.986 42, 297.887 42 C 300.254 42, 303.891 36.450, 304.669 31.649 C 305.320 27.638, 303.686 22.079, 300.252 16.621 C 298.344 13.588, 297.948 11.951, 298.436 9.121 C 299.677 1.923, 299.569 0.569, 297.728 0.200 C 296.434 -0.059, 295.398 1.108, 293.886 4.525 M 308.831 2.750 C 305.501 8.473, 305.673 10.988, 309.973 19.446 C 312.188 23.804, 314 28.259, 314 29.346 C 314 30.434, 312.852 33.283, 311.450 35.676 C 308.758 40.268, 308.907 42, 311.991 42 C 314.940 42, 318.308 36.338, 318.778 30.592 C 319.135 26.219, 318.686 24.545, 315.597 18.736 C 311.581 11.184, 311.355 9.760, 313.517 5.615 C 314.652 3.439, 314.743 2.395, 313.888 1.365 C 312.164 -0.712, 310.596 -0.283, 308.831 2.750 M 251.315 19.464 C 247.515 21.116, 245 25.532, 245 30.550 C 245 33.344, 245.772 34.972, 248.292 37.492 L 251.583 40.783 249.356 43.373 C 246.269 46.962, 245.757 51.856, 246.154 73.963 L 246.500 93.166 249.766 96.083 C 254.178 100.024, 258.821 100.025, 263.234 96.084 L 266.500 93.168 266.831 73.865 C 267.212 51.627, 266.723 46.953, 263.644 43.373 L 261.417 40.783 264.708 37.492 C 267.228 34.972, 268 33.344, 268 30.550 C 268 25.494, 265.712 21.566, 261.643 19.635 C 257.502 17.670, 255.515 17.637, 251.315 19.464 M 20.205 20.833 C 9.076 24.806, 2.526 33.023, 0.850 45.112 C 0.289 49.166, -0.020 61.637, 0.165 72.825 L 0.500 93.167 3.766 96.083 C 8.159 100.007, 12.824 100.023, 17.182 96.128 C 20.302 93.341, 20.409 92.977, 20.815 83.685 L 21.234 74.113 24.058 76.201 C 26.434 77.957, 27.831 78.202, 32.869 77.746 C 43.885 76.747, 54.093 69.046, 57.446 59.205 C 59.270 53.851, 59.470 44.302, 57.870 38.962 C 53.472 24.280, 35.193 15.483, 20.205 20.833 M 27 39.669 C 26.175 39.991, 24.488 41.176, 23.250 42.302 C 21.239 44.132, 21 45.292, 21 53.247 L 21 62.145 23.635 60.073 C 25.141 58.888, 27.744 58, 29.712 58 C 37.420 58, 41.829 48.326, 36.750 42.555 C 34.483 39.979, 29.776 38.586, 27 39.669 M 81.951 41.303 C 75.469 43.135, 70.466 46.510, 66.469 51.745 C 62.298 57.207, 60.812 62.231, 60.877 70.653 C 60.997 86.293, 73.623 99, 89.043 99 C 94.145 99, 98.972 96.188, 99.035 93.177 C 99.061 91.946, 99.423 92.135, 100.396 93.890 C 103.557 99.594, 111.458 100.696, 116.077 96.077 L 119 93.154 119 77.737 C 119 62.478, 118.968 62.255, 115.883 56.081 C 112.700 49.712, 107.910 45.224, 101.244 42.365 C 96.498 40.329, 87.204 39.817, 81.951 41.303 M 147.951 41.303 C 138.517 43.970, 130.398 51.648, 127.762 60.394 C 125.936 66.453, 126.017 111.787, 127.860 115.235 C 130.748 120.638, 138.221 121.562, 143.182 117.128 C 146.304 114.339, 146.408 113.981, 146.817 104.649 L 147.237 95.041 149.753 97.021 C 152.917 99.509, 159.786 99.633, 166.563 97.324 C 173.172 95.072, 181.072 87.172, 183.324 80.563 C 188.660 64.901, 181.802 48.609, 167.244 42.365 C 162.498 40.329, 153.204 39.817, 147.951 41.303 M 199.357 40.951 C 193.576 43.393, 192.024 52.752, 196.636 57.364 C 198.829 59.557, 200.175 60, 204.636 60 C 207.586 60, 210 60.234, 210 60.519 C 210 60.805, 206.797 64.742, 202.882 69.269 C 190.547 83.532, 187.160 92.117, 192.102 96.595 C 193.979 98.296, 196.172 98.533, 212.534 98.811 C 227.397 99.063, 231.417 98.836, 233.791 97.608 C 237.427 95.728, 239.437 91.144, 238.595 86.654 C 237.664 81.690, 234.753 79.583, 228.021 79 L 222.249 78.500 230.100 69.120 C 237.786 59.936, 243 51.344, 243 47.859 C 243 46.898, 241.915 44.849, 240.588 43.306 L 238.177 40.500 219.838 40.273 C 209.752 40.148, 200.536 40.453, 199.357 40.951 M 86.357 60.992 C 83.179 62.274, 81 65.973, 81 70.086 C 81 74.705, 84.945 79, 89.186 79 C 92.509 79, 97.571 81.341, 98.331 83.229 C 98.612 83.928, 98.878 80.533, 98.921 75.684 C 99.012 65.581, 98.171 63.387, 93.452 61.415 C 89.620 59.814, 89.319 59.796, 86.357 60.992 M 152.357 60.992 C 148.259 62.645, 147 65.869, 147 74.708 L 147 82.971 150.250 80.989 C 152.037 79.899, 154.703 79.006, 156.173 79.004 C 160.420 78.998, 165 74.506, 165 70.345 C 165 65.581, 163.449 63.086, 159.452 61.415 C 155.620 59.814, 155.319 59.796, 152.357 60.992"
-          stroke="none"
-          fill="#fffcfc"
-          fill-rule="evenodd"
-        />
-        <path d="" stroke="none" fill="#fcfcfc" fill-rule="evenodd" />
-      </svg>
-    </a>
 
-    <button
-      class="navbar-toggler d-lg-none"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapsibleNavId"
-      aria-controls="collapsibleNavId"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="{{ url_for('index') }}"
-            aria-current="page"
-            >ACCUEIL <span class="visually-hidden">(current)</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('boutique') }}">BOUTIQUE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('blog') }}">BLOG</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('contact') }}">CONTACT</a>
-        </li>
-      </ul>
+{# offcanvas panier #}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+     style="width: 600px;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Mon Panier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div
-      class="collapse navbar-collapse justify-content-end"
-      id="navbarSupportedContent"
-    >
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            data-bs-toggle="offcanvas"
-            href="#offcanvasRight"
-            role="button"
-            aria-controls="offcanvasExample"
-          >
-            <i class="fa-solid fa-search"></i>
-          </a>
-        </li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="fa-solid fa-user"></i>
-          </a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="#"
-            data-bs-toggle="modal"
-            data-bs-target="#modalId"
-          >
-            <i class="fa-solid fa-circle-user"></i>
-          </a>
-        </li>
+    <div class="offcanvas-body">
+        <div style="margin-top: 120px; margin-bottom: 22px;">
+            <h1 class="text-center" style="color: red;">
+                PANIER
+            </h1>
+        </div>
+        {% if cart %}
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-1 g-4">
+                    {% for plat in cart %}
+                        <div class="col mb-4">
+                            <div class="card h-100">
+                                <div class="row g-0">
+                                    <div class="col-md-6">
+                                        <img src="{{ url_for('static', filename=plat.image) }}"
+                                             class="img-fluid rounded-start h-100" alt="{{ plat.nom }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ plat.nom }}</h5>
+                                            <p class="card-text">{{ plat.description }}</p>
+                                            <p class="card-text"><small class="text-muted">Prix: {{ plat.prix }}
+                                                CFA</small></p>
+                                            <a href="{{ url_for('commande') }}">
+                                                <button type="button" class="btn btn-primary acheter-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#orderModal">Commander
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+        {% else: %}
+            <h3 class="text-center" style="color: red;">
+                votre panier est vide
+            </h3>
         {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" id="heart" href="#">
-            <i class="fa-solid fa-heart"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('cart') }}">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    </div>
+</div>
+
+<div
+        class="modal fade"
+        id="modalId"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
+>
+    <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg"
+            role="document"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Connexion</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">{% include "login.html" %}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav id="navbar" class="navbar navbar-expand-lg {% if request.endpoint == 'commande' %}bg-whitesmoke{% endif %}">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="120"
+                    height="70"
+                    viewBox="0 0 319 120"
+                    version="1.1"
             >
+                <path
+                        d="M 280.433 2.462 C 279.546 3.816, 278.580 6.711, 278.287 8.896 C 277.846 12.183, 278.380 13.987, 281.377 19.347 C 285.514 26.745, 285.930 30.962, 282.996 35.774 C 281.898 37.575, 281 39.712, 281 40.524 C 281 43.273, 284.883 42.020, 287.663 38.375 C 291.815 32.932, 291.492 26.624, 286.587 17.356 L 282.806 10.212 284.513 6.614 C 287.332 0.674, 283.896 -2.823, 280.433 2.462 M 293.886 4.525 C 291.368 10.217, 291.852 13.764, 295.999 20 C 299.745 25.633, 300.113 32.315, 296.904 36.395 C 294.532 39.411, 294.986 42, 297.887 42 C 300.254 42, 303.891 36.450, 304.669 31.649 C 305.320 27.638, 303.686 22.079, 300.252 16.621 C 298.344 13.588, 297.948 11.951, 298.436 9.121 C 299.677 1.923, 299.569 0.569, 297.728 0.200 C 296.434 -0.059, 295.398 1.108, 293.886 4.525 M 308.831 2.750 C 305.501 8.473, 305.673 10.988, 309.973 19.446 C 312.188 23.804, 314 28.259, 314 29.346 C 314 30.434, 312.852 33.283, 311.450 35.676 C 308.758 40.268, 308.907 42, 311.991 42 C 314.940 42, 318.308 36.338, 318.778 30.592 C 319.135 26.219, 318.686 24.545, 315.597 18.736 C 311.581 11.184, 311.355 9.760, 313.517 5.615 C 314.652 3.439, 314.743 2.395, 313.888 1.365 C 312.164 -0.712, 310.596 -0.283, 308.831 2.750 M 251.315 19.464 C 247.515 21.116, 245 25.532, 245 30.550 C 245 33.344, 245.772 34.972, 248.292 37.492 L 251.583 40.783 249.356 43.373 C 246.269 46.962, 245.757 51.856, 246.154 73.963 L 246.500 93.166 249.766 96.083 C 254.178 100.024, 258.821 100.025, 263.234 96.084 L 266.500 93.168 266.831 73.865 C 267.212 51.627, 266.723 46.953, 263.644 43.373 L 261.417 40.783 264.708 37.492 C 267.228 34.972, 268 33.344, 268 30.550 C 268 25.494, 265.712 21.566, 261.643 19.635 C 257.502 17.670, 255.515 17.637, 251.315 19.464 M 20.205 20.833 C 9.076 24.806, 2.526 33.023, 0.850 45.112 C 0.289 49.166, -0.020 61.637, 0.165 72.825 L 0.500 93.167 3.766 96.083 C 8.159 100.007, 12.824 100.023, 17.182 96.128 C 20.302 93.341, 20.409 92.977, 20.815 83.685 L 21.234 74.113 24.058 76.201 C 26.434 77.957, 27.831 78.202, 32.869 77.746 C 43.885 76.747, 54.093 69.046, 57.446 59.205 C 59.270 53.851, 59.470 44.302, 57.870 38.962 C 53.472 24.280, 35.193 15.483, 20.205 20.833 M 27 39.669 C 26.175 39.991, 24.488 41.176, 23.250 42.302 C 21.239 44.132, 21 45.292, 21 53.247 L 21 62.145 23.635 60.073 C 25.141 58.888, 27.744 58, 29.712 58 C 37.420 58, 41.829 48.326, 36.750 42.555 C 34.483 39.979, 29.776 38.586, 27 39.669 M 81.951 41.303 C 75.469 43.135, 70.466 46.510, 66.469 51.745 C 62.298 57.207, 60.812 62.231, 60.877 70.653 C 60.997 86.293, 73.623 99, 89.043 99 C 94.145 99, 98.972 96.188, 99.035 93.177 C 99.061 91.946, 99.423 92.135, 100.396 93.890 C 103.557 99.594, 111.458 100.696, 116.077 96.077 L 119 93.154 119 77.737 C 119 62.478, 118.968 62.255, 115.883 56.081 C 112.700 49.712, 107.910 45.224, 101.244 42.365 C 96.498 40.329, 87.204 39.817, 81.951 41.303 M 147.951 41.303 C 138.517 43.970, 130.398 51.648, 127.762 60.394 C 125.936 66.453, 126.017 111.787, 127.860 115.235 C 130.748 120.638, 138.221 121.562, 143.182 117.128 C 146.304 114.339, 146.408 113.981, 146.817 104.649 L 147.237 95.041 149.753 97.021 C 152.917 99.509, 159.786 99.633, 166.563 97.324 C 173.172 95.072, 181.072 87.172, 183.324 80.563 C 188.660 64.901, 181.802 48.609, 167.244 42.365 C 162.498 40.329, 153.204 39.817, 147.951 41.303 M 199.357 40.951 C 193.576 43.393, 192.024 52.752, 196.636 57.364 C 198.829 59.557, 200.175 60, 204.636 60 C 207.586 60, 210 60.234, 210 60.519 C 210 60.805, 206.797 64.742, 202.882 69.269 C 190.547 83.532, 187.160 92.117, 192.102 96.595 C 193.979 98.296, 196.172 98.533, 212.534 98.811 C 227.397 99.063, 231.417 98.836, 233.791 97.608 C 237.427 95.728, 239.437 91.144, 238.595 86.654 C 237.664 81.690, 234.753 79.583, 228.021 79 L 222.249 78.500 230.100 69.120 C 237.786 59.936, 243 51.344, 243 47.859 C 243 46.898, 241.915 44.849, 240.588 43.306 L 238.177 40.500 219.838 40.273 C 209.752 40.148, 200.536 40.453, 199.357 40.951 M 86.357 60.992 C 83.179 62.274, 81 65.973, 81 70.086 C 81 74.705, 84.945 79, 89.186 79 C 92.509 79, 97.571 81.341, 98.331 83.229 C 98.612 83.928, 98.878 80.533, 98.921 75.684 C 99.012 65.581, 98.171 63.387, 93.452 61.415 C 89.620 59.814, 89.319 59.796, 86.357 60.992 M 152.357 60.992 C 148.259 62.645, 147 65.869, 147 74.708 L 147 82.971 150.250 80.989 C 152.037 79.899, 154.703 79.006, 156.173 79.004 C 160.420 78.998, 165 74.506, 165 70.345 C 165 65.581, 163.449 63.086, 159.452 61.415 C 155.620 59.814, 155.319 59.796, 152.357 60.992"
+                        stroke="none"
+                        fill="#fffcfc"
+                        fill-rule="evenodd"
+                />
+                <path d="" stroke="none" fill="#fcfcfc" fill-rule="evenodd"/>
+            </svg>
+        </a>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId"
+                aria-controls="collapsibleNavId"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a
+                            class="nav-link active"
+                            href="{{ url_for('index') }}"
+                            aria-current="page"
+                    >ACCUEIL <span class="visually-hidden">(current)</span></a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('boutique') }}">BOUTIQUE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('blog') }}">BLOG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">CONTACT</a>
+                </li>
+            </ul>
+        </div>
+        <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarSupportedContent"
+        >
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasSearch"
+                            aria-controls="offcanvasSearch"
+                    >
+                        <i class="fa-solid fa-search"></i>
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a
+                                class="nav-link"
+                                href="#"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalId"
+                        >
+                            <i class="fa-solid fa-circle-user"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" id="heart" href="#">
+                        <i class="fa-solid fa-heart"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""
+                       data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white"
+                        >
               <span id="cart-count">{{ session.get('cart_count', 0) }}</span>
               <span class="visually-hidden">unread messages</span>
             </span>
-          </a>
-        </li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
+                    </a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>

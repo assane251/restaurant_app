@@ -1,100 +1,102 @@
 {% extends 'base.html' %} {% block title %} Commande {% endblock %} {% block
     content %}
-    {% include "includes/_navbar.html" %}  
-<div class="containern" style="width: 100%;background-color: whitesmoke;">
-    <h1 class="text-bold text-center pt-1">Valider Votre Commande</h1>
+    {% include "includes/_navbar.html" %}
+    <div class="containern" style="width: 100%;background-color: whitesmoke;">
+        <h1 class="text-bold text-center pt-1">Valider Votre Commande</h1>
         <div class="mt-4 pb-4">
             <i class="fas fa-user" style="font-size: 24px; animation: bounce 2s infinite;"></i>
             <span class="ml-2">Déjà client ? <a href="{{ url_for('login') }}">Cliquez ici pour vous connecter</a></span>
         </div>
-    <div class="row m-2">
-        <!-- Formulaire utilisateur -->
-        <div class="col-md-6">
-            <div class="card p-4">
-                <h4 class="card-title">Informations</h4>
-                <form method="post" action="/create_commande">
-                    {% if not current_user.is_authenticated %}
-                    <div class="mb-3">
-                        <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    {% endif %}
-                    <button type="submit" class="btn btn-primary">Commander</button>
-                </form>
+        <div class="row m-2">
+            <!-- Formulaire utilisateur -->
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4 class="card-title">Informations</h4>
+                    <form method="post" action="/create_commande">
+                        {% if not current_user.is_authenticated %}
+                            <div class="mb-3">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">Commander</button>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <!-- Panier et récapitulatif -->
-        <div class="col-md-6">
-            <!-- Tableau des plats -->
-            <div class="card p-4 mb-4">
-                <h4 class="card-title">Votre Panier</h4>
-                <table class="table">
-                    <thead>
+            <!-- Panier et récapitulatif -->
+            <div class="col-md-6">
+                <!-- Tableau des plats -->
+                <div class="card p-4 mb-4">
+                    <h4 class="card-title">Votre Panier</h4>
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Photo</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Prix (CFA)</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {% for plat in cart %}
-                        <tr>
-                            <td><input type="checkbox" name="plat" value="{{ plat.id }}"></td>
-                            <td><img src="{{ url_for('static', filename=plat.image) }}" class="img-fluid" alt="{{ plat.nom }}" style="width: 50px;"></td>
-                            <td>{{ plat.nom }}</td>
-                            <td>{{ plat.prix }}</td>
-                        </tr>
+                            <tr>
+                                <td><input type="checkbox" name="plat" value="{{ plat.id }}"></td>
+                                <td><img src="{{ url_for('static', filename=plat.image) }}" class="img-fluid"
+                                         alt="{{ plat.nom }}" style="width: 50px;"></td>
+                                <td>{{ plat.nom }}</td>
+                                <td>{{ plat.prix }}</td>
+                            </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
-                <button class="btn btn-success" onclick="updateSelection()">Sélectionner</button>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success" onclick="updateSelection()">Sélectionner</button>
+                </div>
+
+                <!-- Récapitulatif de la commande -->
+                <div class="card p-4">
+                    <h4 class="card-title">Récapitulatif de la commande</h4>
+                    <p>Nombre de plats sélectionnés: <span id="selectedCount">0</span></p>
+                    <p>Prix total: <span id="totalPrice">0</span> CFA</p>
+                    <div class="">
+                        <button type="button" class="btn btn-outline-secondary btn-custom w-100" data-bs-toggle="modal"
+                                data-bs-target="#modelpayment">
+                            Acheter
+                        </button>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Récapitulatif de la commande -->
-            <div class="card p-4">
-                <h4 class="card-title">Récapitulatif de la commande</h4>
-                <p>Nombre de plats sélectionnés: <span id="selectedCount">0</span></p>
-                <p>Prix total: <span id="totalPrice">0</span> CFA</p>
-                <div class="">
-                    <button type="button" class="btn btn-outline-secondary btn-custom w-100" data-bs-toggle="modal" data-bs-target="#modelpayment">
-                      Acheter
-                    </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modelpayment" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderModalLabel">Passer une commande</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="orderForm" action="{{ url_for('cart') }}" method="post">
+                            <div class="mb-3" id="paypal-button-container"></div>
+                            <button type="submit" class="btn btn-primary">Payer</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal -->
-                    <div class="modal fade" id="modelpayment" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="orderModalLabel">Passer une commande</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="orderForm" action="{{ url_for('cart') }}" method="post"> 
-                                        <div class="mb-3" id="paypal-button-container"></div>
-                                        <button type="submit" class="btn btn-primary">Payer</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-</div>
     <script src="https://www.paypal.com/sdk/js?client-id=AQhYiNzU-6vg4etXjKkDGeKHNF7gpiA7NFMyAn9vdtJcu3AH48HvoDkR8iayGKKB3MTUQwYQcVjWX8Md"></script>
     <script src="{{ url_for('static', filename='js/paypal.js') }}"></script>
 

@@ -274,7 +274,7 @@ div.align-items-start .col {
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  font-size: 16px;
+  /*font-size: 16px;*/
   color: white;
   background-color: red;
   text-decoration: none;
@@ -898,10 +898,11 @@ a:hover {
 }
 
 @media (min-width: 568px) {
-  /* .footer-content-column {
+  .footer-content-column {
         width: 49.99%;
-    } */
+    }
 }
+
 .form-container:hover {
   transform: scale(1.05);
 }

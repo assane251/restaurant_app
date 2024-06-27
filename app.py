@@ -52,8 +52,13 @@ client_secret = "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"
 google_bp = make_google_blueprint(
     client_id=client_id,
     client_secret=client_secret,
-    scope=['profile', 'email', 'https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/drive.readonly'],
-    redirect_to='http://localhost:5000/google_login/authorized'  
+    scope=[
+        "profile",
+        "email",
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/drive.readonly",
+    ],
+    redirect_to="http://localhost:5000/google_login/authorized",
 )
 app.register_blueprint(google_bp, url_prefix="/google_login")
 
@@ -80,25 +85,22 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
+    cart = session.get("cart", [])
+    return render_template("index.html", plats=plats, cart=cart)
 
-    return render_template("index.html", plats=plats)
 
 def generate_verification_code():
     return "".join(str(random.randint(0, 9)) for _ in range(6))
 
 
-
-
-
-
-@app.route('/register', methods=['GET', 'POST'])
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == 'POST': 
-        nom = request.form.get('nom')
-        prenom = request.form.get('prenom')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        
+    if request.method == "POST":
+        nom = request.form.get("nom")
+        prenom = request.form.get("prenom")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
         verification_code = generate_verification_code()
         print("verification_code")
 
@@ -114,12 +116,12 @@ def register():
         if user:
             flash({"message": "ce email a deja un compte"})
             return redirect(url_for("login"))
-        
+
         user = User.query.filter_by(email=email).first()
-        
-        if user: 
-            flash({'message': 'ce email a deja un compte'})
-            return redirect(url_for('login'))
+
+        if user:
+            flash({"message": "ce email a deja un compte"})
+            return redirect(url_for("login"))
         else:
             new_user = User(
                 nom=nom,
@@ -135,9 +137,8 @@ def register():
             except:
                 flash({"message": "erreur"})
                 print("erreur")
-              
-              
-    return render_template('register.html')
+
+    return render_template("register.html")
 
 
 # @app.route('/verify', methods=['GET', 'POST'])
@@ -177,14 +178,14 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/google_login')
+@app.route("/google_login")
 def google_login():
     if not google.authorized:
-        return redirect(url_for('google.login'))
+        return redirect(url_for("google.login"))
     resp = google.get("/oauth2/v2/userinfo")
     if not resp.ok:
-        flash("Échec de la connexion Google", 'danger')
-        return redirect(url_for('login'))
+        flash("Échec de la connexion Google", "danger")
+        return redirect(url_for("login"))
 
     user_info = resp.json()
     email = user_info["email"]
@@ -231,11 +232,11 @@ def add_to_cart():
     return jsonify({"count": session["cart_count"]})
 
 
-@app.route("/cart", methods=["POST", "GET"])
-def cart():
-     
-    cart = session.get("cart", [])
-    return render_template("cart.html", cart=cart)
+# @app.route("/cart", methods=["POST", "GET"])
+# def cart():
+#
+#     cart = session.get("cart", [])
+# return render_template("cart.html", cart=cart)
 #     if request.method == "POST":
 #         if current_user.is_authenticated:
 #             flash({"message": f"Merci  pour votre commande"})
@@ -255,7 +256,6 @@ def cart():
 #             db.session.commit()
 #             flash({"message": f"Merci Compte a ete creer"})
 #             print("Compte a ete creer")
-    
 
 
 @app.route("/contact")
@@ -272,7 +272,6 @@ def blog():
 def boutique():
 
     return render_template("boutique.html", plats=plats)
-    
 
 
 @app.route("/commande", methods=["GET", "POST"])
@@ -289,13 +288,13 @@ def commande():
 
     else:
         flash("message", "erreur")
-    
+
     cart = session.get("cart", [])
 
-    return render_template('commande.html', cart=cart)
+    return render_template("commande.html", cart=cart)
 
 
-if __name__ == '_main_':
+if __name__ == "_main_":
     with app.app_context():
         try:
             # Créer toutes les tables définies dans les modèles
